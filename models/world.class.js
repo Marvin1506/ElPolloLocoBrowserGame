@@ -9,7 +9,7 @@ class World {
         new Cloud(),
     ];
     backgroundObjects =  [
-        new BackgroundObject("img/5_background/layers/1_first_layer/1.png"),
+        new BackgroundObject("img/5_background/layers/1_first_layer/1.png", 0, 80),
     ];
     canvas;
     ctx;
@@ -43,6 +43,6 @@ class World {
     }
 
     addToMap(mo) {
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.height, mo.width);
+        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
     }
 }
