@@ -5,6 +5,12 @@ class World {
         new Chicken(),
         new Chicken(),
     ];
+    clouds = [
+        new Cloud(),
+    ];
+    backgroundObjects =  [
+        new BackgroundObject("img/5_background/layers/1_first_layer/1.png"),
+    ];
     canvas;
     ctx;
 
@@ -16,20 +22,25 @@ class World {
 
     draw() {
 
-        //deletes the img character of pepe
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        //generates the img character of pepe
         this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.height, this.character.width);
-        //generates chicken img of enemies chicken
         this.enemies.forEach(enemy => {
             this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.height, enemy.width);
         })
-
-        //draw will call multiple times, depends on gpu
+        this.clouds.forEach(cloud => {
+            this.ctx.drawImage(cloud.img, cloud.x, cloud.y, cloud.height, cloud.width);
+        })
+        this.backgroundObjects.forEach(backgroundobject => {
+            this.ctx.drawImage(backgroundobject.img, backgroundobject.x, backgroundobject.y, backgroundobject.height, backgroundobject.width);
+        })
         let self = this;
         requestAnimationFrame(function() {
             self.draw();
         });
+    }
+
+    addToMap(mo) {
+        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.height, mo.width);
     }
 }
