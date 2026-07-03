@@ -19,7 +19,7 @@ class Character extends movableObject {
     }
 
     animate() {
-        // how quick the character moves
+        // how quick the character moves and takes the keyboard input
         setInterval( () => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.x += this.speed;

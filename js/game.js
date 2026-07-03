@@ -10,7 +10,7 @@ function init() {
     console.log("My character is", world.character);
 }
 
-window.addEventListener("keydown", (event) => {
+window.addEventListener("keydown", (event) => { // event listener that listens for keydown events and sets the corresponding property of the keyboard object to true when the key is pressed
     console.log("event", event);
     if (event.key == "ArrowRight") {
         keyboard.RIGHT = true;
