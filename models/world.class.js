@@ -52,7 +52,7 @@ class World {
             mo.x = mo.x * -1;
         }
 
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height); // draw the image of the object on the canvas at the specified position and size
+        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height); // draw the image of the object on the canvas at the specified position and size (uses gpu)
         
         if (mo.otherDirection) {
              mo.x = mo.x * -1;
