@@ -44,7 +44,7 @@ class World {
         })
     }
 
-    addToMap(mo) {  // add a single object to the map
+    addToMap(mo) {  // add a single object to the map and saves the current state of an object character turns so that it can be restored later with no spaces etc.
         if (mo.otherDirection) {
             this.ctx.save();
             this.ctx.translate(mo.width, 0);
@@ -52,7 +52,7 @@ class World {
             mo.x = mo.x * -1;
         }
 
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height); // draw the image of the object on the canvas at the specified position and size
         
         if (mo.otherDirection) {
              mo.x = mo.x * -1;
