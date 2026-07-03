@@ -7,7 +7,7 @@ class World {
     camera_x = 0;
 
 
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard) { // canvas and keyboard are passed as parameters to the constructor function
         this.ctx = canvas.getContext("2d");
         this.canvas = canvas;
         this.keyboard = keyboard;
@@ -15,7 +15,7 @@ class World {
         this.setWorld();
     }
 
-    setWorld() {
+    setWorld() {    // set the world property of the character to the current instance of the World class so that the character can access the properties and methods of the World class
         this.character.world = this;
     }
 
