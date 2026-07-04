@@ -7,7 +7,22 @@ class movableObject {
     imageCache = {}; //savepoint of images that are already loaded
     currentImage = 0;
     speed = 0.15;
-    otherDirection = false; // 
+    otherDirection = false; //
+    speedY = 0;
+    acceleration = 2.5;
+
+    applyGravity() {
+        setInterval(() => {
+            if (this.y < 150) {
+            this.y -= this.speedY;
+            this.speedY -= this.acceleration;
+            }
+        }, 1000 / 25);
+    }
+
+    isAboveGround() {
+        return this.y < 150;
+    }
 
     //loads the image of the object and sets the src of the image to the path of the image
     loadImage(path) {
