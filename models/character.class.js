@@ -34,17 +34,18 @@ class Character extends movableObject {
 
     animate() {
         // how quick the character moves and takes the keyboard input
+        // walking sound pause and walking sound play in left and right movement later
         setInterval( () => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.x += this.speed;
+                this.moveRight();
                 this.otherDirection = false;
             }
             if (this.world.keyboard.LEFT && this.x > -620) {
-                this.x -= this.speed;
+                this.moveLeft();
                 this.otherDirection = true;
             }
-            if(this.world.keyboard.UP && !this.isAboveGround()) {
-                this.speedY = 30;
+            if(this.world.keyboard.SPACE && !this.isAboveGround()) {
+                this.jump();
             }
 
             this.world.camera_x = -this.x + 100;
@@ -62,7 +63,4 @@ class Character extends movableObject {
         }, 50);
     }
 
-    jump() {
-
-    }
 }

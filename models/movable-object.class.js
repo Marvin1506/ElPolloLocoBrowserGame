@@ -49,14 +49,16 @@ class movableObject {
 
     //moves the object to the right by changing the x position of the object.
     moveRight() {
-        console.log("Moving right");
+        this.x += this.speed;
     }
 
     //moves the object to the left by changing the x position of the object.
     moveLeft() {
-        setInterval(() => {
             this.x -= this.speed;
-        }, 1000 / 60);
+    }
+
+    jump() {
+        this.speedY = 30;
     }
 }
 
