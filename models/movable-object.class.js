@@ -54,7 +54,7 @@ class movableObject {
 
     //moves the object to the left by changing the x position of the object.
     moveLeft() {
-            this.x -= this.speed;
+        this.x -= this.speed;
     }
 
     jump() {
