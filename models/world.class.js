@@ -53,7 +53,12 @@ class World {
         }
 
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height); // draw the image of the object on the canvas at the specified position and size (uses gpu)
-        
+        this.ctx.beginPath();
+        this.ctx.lineWidth = "2";
+        this.ctx.strokeStyle = "blue";
+        this.ctx.rect(mo.x, mo.y, mo.width, mo.height);
+        this.ctx.stroke();
+
         if (mo.otherDirection) {
              mo.x = mo.x * -1;
             this.ctx.restore();
