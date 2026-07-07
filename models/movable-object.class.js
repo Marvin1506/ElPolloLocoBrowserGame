@@ -1,11 +1,4 @@
-class movableObject {
-    x = 120;
-    y = 280;
-    img;
-    height = 150;
-    width = 100;
-    imageCache = {}; //savepoint of images that are already loaded
-    currentImage = 0;
+class movableObject extends DrawableObject {
     speed = 0.15;
     otherDirection = false; //
     speedY = 0;
@@ -27,16 +20,6 @@ class movableObject {
         return this.y < 150;
     }
 
-    //loads the image of the object and sets the src of the image to the path of the image
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
-
     drawFrame(ctx) {
         if(this instanceof Character || this instanceof Chicken){
             ctx.beginPath();
@@ -56,7 +39,7 @@ class movableObject {
     }
 
     hit() {
-        this.energy -= 5;
+        this.energy -= 20;
         if(this.energy < 0) {
             this.energy = 0;
         } else {
@@ -72,15 +55,6 @@ class movableObject {
 
     isDead() {
         return this.energy == 0;
-    }
-
-    //turns the objects into imgs and pushes the already loaded imgs into the imageCache object array
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
     }
 
     //plays the animation of the object by changing the image of the object
