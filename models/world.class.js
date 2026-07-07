@@ -5,6 +5,7 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
+    statusBar = new StatusBar();
 
 
     constructor(canvas, keyboard) { // canvas and keyboard are passed as parameters to the constructor function
@@ -38,6 +39,7 @@ class World {
         this.ctx.translate(this.camera_x, 0);   //change the origin of the canvas to the right by camera_x pixels
         
         this.addObjectsToMap(this.level.backgroundObjects); //add all background objects to the map
+        this.addToMap(this.statusBar);
         this.addObjectsToMap(this.level.clouds);    
         this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
