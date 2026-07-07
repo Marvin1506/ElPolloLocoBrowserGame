@@ -10,6 +10,7 @@ class movableObject {
     otherDirection = false; //
     speedY = 0;
     acceleration = 2.5;
+    energy = 100;
     //offset object will be added later for correct collision position
 
     applyGravity() {
@@ -51,6 +52,17 @@ class movableObject {
         this.y + this.height > mo.y &&
         this.x < mo.x + mo.width &&
         this.y < mo.y + mo.height;
+    }
+
+    hit() {
+        this.energy -= 5;
+        if(this.energy < 0) {
+            this.energy = 0;
+        }
+    }
+
+    isDead() {
+        return this.energy == 0;
     }
 
     //turns the objects into imgs and pushes the already loaded imgs into the imageCache object array
