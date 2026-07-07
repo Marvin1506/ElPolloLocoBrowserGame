@@ -11,7 +11,6 @@ function init() {
 }
 
 window.addEventListener("keydown", (event) => { // event listener that listens for keydown events and sets the corresponding property of the keyboard object to true when the key is pressed
-    console.log("event", event);
     if (event.key == "ArrowRight") {
         keyboard.RIGHT = true;
     }
@@ -30,7 +29,6 @@ window.addEventListener("keydown", (event) => { // event listener that listens f
 });
 
 window.addEventListener("keyup", (event) => {
-    console.log("event", event);
     if (event.key == "ArrowRight") {
         keyboard.RIGHT = false;
     }

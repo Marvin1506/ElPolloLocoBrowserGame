@@ -10,6 +10,7 @@ class movableObject {
     otherDirection = false; //
     speedY = 0;
     acceleration = 2.5;
+    //offset object will be added later for correct collision position
 
     applyGravity() {
         setInterval(() => {
@@ -42,6 +43,14 @@ class movableObject {
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
+    }
+
+    // character.isColliding(chicken)
+    isColliding(mo) {
+        return this.x + this.width > mo.x &&
+        this.y + this.height > mo.y &&
+        this.x < mo.x + mo.width &&
+        this.y < mo.y + mo.height;
     }
 
     //turns the objects into imgs and pushes the already loaded imgs into the imageCache object array

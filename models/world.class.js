@@ -13,10 +13,21 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.checkCollisions();
     }
 
     setWorld() {    // set the world property of the character to the current instance of the World class so that the character can access the properties and methods of the World class
         this.character.world = this;
+    }
+
+    checkCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach( (enemy) => {
+                if(this.character.isColliding(enemy)) {
+                    console.log("Collision with character", enemy);
+                }
+            });
+        }, 1000);
     }
 
     draw() {
