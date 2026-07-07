@@ -11,6 +11,7 @@ class movableObject {
     speedY = 0;
     acceleration = 2.5;
     energy = 100;
+    lastHit = 0;
     //offset object will be added later for correct collision position
 
     applyGravity() {
@@ -58,7 +59,15 @@ class movableObject {
         this.energy -= 5;
         if(this.energy < 0) {
             this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
         }
+    }
+
+    isHurt() {
+        let timePassed = new Date().getTime() - this.lastHit; // difference in ms
+        timePassed = timePassed / 1000; //difference in s
+        return timePassed < 0.5; //time of the true return
     }
 
     isDead() {
