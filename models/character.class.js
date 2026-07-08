@@ -70,10 +70,14 @@ class Character extends movableObject {
         }, 1000 / 60); // fps
 
         setInterval( () => {
-            if(this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
+            if (this.isDead()) {
+                if (!this.deadAnimationStarted) {
+                    this.currentImage = 0;
+                    this.deadAnimationStarted = true;
+                }
+                this.playDeadAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()){
-                 this.playAnimation(this.IMAGES_HURT);
+                this.playAnimation(this.IMAGES_HURT);
             }
              else if(this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
@@ -84,7 +88,7 @@ class Character extends movableObject {
                     this.playAnimation(this.IMAGES_WALKING);
                     }
             }
-        }, 50);
+        }, 100);
     }
 
 }

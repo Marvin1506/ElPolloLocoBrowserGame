@@ -5,6 +5,7 @@ class movableObject extends DrawableObject {
     acceleration = 2.5;
     energy = 100;
     lastHit = 0;
+    deadAnimationStarted = false;
     //offset object will be added later for correct collision position
 
     applyGravity() {
@@ -57,6 +58,16 @@ class movableObject extends DrawableObject {
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
+    }
+
+    playDeadAnimation(images) {
+        if (this.currentImage < images.length) {
+            let path = images[this.currentImage];
+            this.img = this.imageCache[path];
+            this.currentImage++;
+        } else {
+            this.img = this.imageCache[images[images.length - 1]];
+        }
     }
 
     //moves the object to the right by changing the x position of the object.
