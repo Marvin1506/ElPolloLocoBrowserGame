@@ -28,9 +28,56 @@ canvas {
     url('img/10_font/zabars.ttf')  format('truetype'), /* Safari, Android, iOS */
 }
 
+@media only screen and (min-width: 720px) {
+    .mobile-button-flexbox {
+        display: none;
+    }
+}
+
 @media only screen and (max-width: 720px) {
     canvas {
         width: 100%;
+    }
+
+    .mobile-button-flexbox {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+    }
+
+    .control-panel {
+        pointer-events: all;
+
+        width: 62px;
+        height: 62px;
+
+        border: none;
+        border-radius: 50%;
+
+        background: rgba(255, 170, 0, 0.85);
+        color: white;
+
+        font-size: 32px;
+        font-weight: bold;
+
+        cursor: pointer;
+        user-select: none;
+
+        box-shadow:
+            0 8px 16px rgba(0,0,0,.35),
+            inset 0 2px 3px rgba(255,255,255,.4),
+            inset 0 -4px 8px rgba(0,0,0,.25);
+
+        transition: transform .1s, box-shadow .1s;
+    }
+
+    .control-btn:active {
+        transform: scale(.92);
+
+        box-shadow:
+            0 2px 6px rgba(0,0,0,.4),
+            inset 0 4px 8px rgba(0,0,0,.35);
     }
 }
 
