@@ -6,7 +6,7 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
-
+    throwableObjects = [new ThrowableObject()];
 
     constructor(canvas, keyboard) { // canvas and keyboard are passed as parameters to the constructor function
         this.ctx = canvas.getContext("2d");
@@ -30,7 +30,7 @@ class World {
                     //console.log("Collision with character", this.character.energy);
                 }
             });
-        }, 200);
+        }, 1000);
     }
 
     draw() {
@@ -48,6 +48,7 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.throwableObjects);
         this.addToMap(this.character);
 
         this.ctx.translate(-this.camera_x, 0);
