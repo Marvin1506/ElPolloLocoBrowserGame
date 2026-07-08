@@ -46,9 +46,23 @@ canvas {
 
     }
 
-    .control-panel {
-        pointer-events: all;
+    .mobile-button-div-move-left-right {
+        display: flex;
+        gap: 16px;
+    }
 
+    .mobile-button-div-jump-throw {
+        display: flex;
+        gap: 16px;
+    }
+
+    .control-panel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: all;
+        line-height: 1;
+        padding: 0;
         width: 62px;
         height: 62px;
 
@@ -78,6 +92,11 @@ canvas {
         box-shadow:
             0 2px 6px rgba(0,0,0,.4),
             inset 0 4px 8px rgba(0,0,0,.35);
+    }
+
+    .throw-bottle-icon-mobile {
+        width: 75px;
+        height: 75px;
     }
 }
 

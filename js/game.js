@@ -1,6 +1,10 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+const leftBtn = document.getElementById("left");
+const rightBtn = document.getElementById("right");
+const jumpBtn = document.getElementById("jump");
+const throwBtn = document.getElementById("throw");
 
 function init() {
     canvas = document.getElementById("canvas");
@@ -50,4 +54,44 @@ window.addEventListener("keyup", (event) => {
     if (event.code == "KeyD") {
         keyboard.D = true
     }
+});
+
+leftBtn.addEventListener("touchstart", () => {
+    event.preventDefault();
+    keyboard.LEFT = true;
+});
+
+leftBtn.addEventListener("touchend", () => {
+    event.preventDefault();
+    keyboard.LEFT = false;
+});
+
+rightBtn.addEventListener("touchstart", () => {
+    event.preventDefault();
+    keyboard.RIGHT = true;
+});
+
+rightBtn.addEventListener("touchend", () => {
+    event.preventDefault();
+    keyboard.RIGHT = false;
+});
+
+jumpBtn.addEventListener("touchstart", () => {
+    event.preventDefault();
+    keyboard.SPACE = true;
+});
+
+jumpBtn.addEventListener("touchend", () => {
+    event.preventDefault();
+    keyboard.SPACE = false;
+});
+
+throwBtn.addEventListener("touchstart", () => {
+    event.preventDefault();
+    keyboard.D = true;
+});
+
+throwBtn.addEventListener("touchend", () => {
+    event.preventDefault();
+    keyboard.D = false;
 });
