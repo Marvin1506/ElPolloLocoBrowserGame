@@ -6,7 +6,7 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
-    throwableObjects = [new ThrowableObject()];
+    throwableObjects = [];
 
     constructor(canvas, keyboard) { // canvas and keyboard are passed as parameters to the constructor function
         this.ctx = canvas.getContext("2d");
@@ -14,23 +14,36 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.run();
     }
 
     setWorld() {    // set the world property of the character to the current instance of the World class so that the character can access the properties and methods of the World class
         this.character.world = this;
     }
 
-    checkCollisions() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach( (enemy) => {
-                if(this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    this.statusBar.setPercentage(this.character.energy);
-                    //console.log("Collision with character", this.character.energy);
-                }
-            });
-        }, 1000);
+            this.checkCollisions();
+            this.checkThrowObjects();
+        }, 200);
+    }
+
+    checkThrowObjects() {
+        if(this.keyboard.D) {
+            let bottle = new ThrowableObject(this.character.x + 40, this.character.y + 90);
+            this.throwableObjects.push(bottle);
+            this.keyboard.D = false; //resets so not multiple bottles will be thrown
+        }
+    }
+
+    checkCollisions() {
+        this.level.enemies.forEach( (enemy) => {
+            if(this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.statusBar.setPercentage(this.character.energy);
+                //console.log("Collision with character", this.character.energy);
+            }
+        });
     }
 
     draw() {
