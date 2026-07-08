@@ -11,30 +11,31 @@
     
 <h1>El Pollo Loco</h1>
 
-<canvas id="canvas" width="720" height="480">
+    <div class="game-content">
+        <canvas id="canvas" width="720" height="480">
 
-</canvas>
+        </canvas>
 
-<div class="mobile-button-flexbox" id="mobile-button-flexbox">
-    <div class="mobile-button-div-move-left-right">
-        <button id="left" class="control-panel">
-            ◀
-        </button>
-        <button id="right" class="control-panel">
-            ▶
-        </button>
+        <div class="mobile-button-flexbox" id="mobile-button-flexbox">
+            <div class="mobile-button-div-move-left-right">
+                <button id="left" class="control-panel">
+                    ◀
+                </button>
+                <button id="right" class="control-panel">
+                    ▶
+                </button>
+            </div>
+
+            <div class="mobile-button-div-jump-throw">
+                <button id="jump" class="control-panel">
+                    ⮝
+                </button>
+                <button id="throw" class="control-panel">
+                    <img class="throw-bottle-icon-mobile" src="img/6_salsa_bottle/salsa_bottle.png" alt="" srcset="">
+                </button>
+            </div>
+        </div>
     </div>
-
-    <div class="mobile-button-div-jump-throw">
-        <button id="jump" class="control-panel">
-            ⮝
-        </button>
-        <button id="throw" class="control-panel">
-            <img class="throw-bottle-icon-mobile" src="img/6_salsa_bottle/salsa_bottle.png" alt="bottle">
-        </button>
-    </div>
-</div>
-
 </body>
 
 <script src="./models/world.class.js"></script>

@@ -35,15 +35,23 @@ canvas {
 }
 
 @media only screen and (max-width: 720px) {
+    .game-content {
+        position: relative;
+        width: 720px;
+    }
+
     canvas {
         width: 100%;
     }
 
     .mobile-button-flexbox {
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        bottom: 10px;
         display: flex;
-        width: 100%;
         justify-content: space-between;
-
+        z-index: 10;
     }
 
     .mobile-button-div-move-left-right {
@@ -63,8 +71,8 @@ canvas {
         pointer-events: all;
         line-height: 1;
         padding: 0;
-        width: 62px;
-        height: 62px;
+        width: 52px;
+        height: 52px;
 
         border: none;
         border-radius: 50%;
@@ -95,8 +103,8 @@ canvas {
     }
 
     .throw-bottle-icon-mobile {
-        width: 75px;
-        height: 75px;
+        width: 65px;
+        height: 65px;
     }
 }
 
