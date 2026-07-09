@@ -6,6 +6,12 @@ class DrawableObject {
     y = 280;
     height = 150;
     width = 100;
+    offset = {
+        top: 0, //120 offset für pepe
+        bottom: 0, //30
+        left: 0, //40
+        right: 0 //30
+    } 
 
 
     //loads the image of the object and sets the src of the image to the path of the image
