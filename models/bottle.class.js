@@ -5,6 +5,13 @@ class Bottle extends DrawableObject {
         "img/6_salsa_bottle/2_salsa_bottle_on_ground.png",
     ];
 
+    offset = {
+        top: 16, //120 offset für pepe
+        bottom: 10, //30
+        left: 20, //40
+        right: 20 //30
+    } 
+
     width = 80;
     height = 80;
     x = 150;
