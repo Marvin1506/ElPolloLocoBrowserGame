@@ -9,12 +9,15 @@ class Bottle extends DrawableObject {
     height = 80;
     x = 150;
     y = 350;
+    static lastX = 200;
 
     constructor() {
         super();
         const randomImage = this.IMAGES_BOTTLES[Math.floor(Math.random() * this.IMAGES_BOTTLES.length)];
         this.loadImage(randomImage);
-        this.x = 400 + Math.random() * 500;
+        this.x = Bottle.lastX + 150 + Math.random() * 350;
+        Bottle.lastX = this.x;
+
         this.y = 350;
     }
 }
