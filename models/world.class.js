@@ -6,6 +6,8 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
+    statusBarCoins = new StatusBarCoins();
+    statusBarBottles = new StatusBarBottles();
     throwableObjects = [];
 
     constructor(canvas, keyboard) { // canvas and keyboard are passed as parameters to the constructor function
@@ -58,6 +60,8 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         // ----Space for fixed objects----
         this.addToMap(this.statusBar);
+        this.addToMap(this.statusBarCoins);
+        this.addToMap(this.statusBarBottles);
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.enemies);
