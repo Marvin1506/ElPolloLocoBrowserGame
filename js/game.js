@@ -31,7 +31,7 @@ window.addEventListener("keydown", (event) => { // event listener that listens f
         keyboard.SPACE = true;
     }
     if (event.code == "KeyD") {
-        keyboard.D = true
+        keyboard.D = true;
     }
 });
 
@@ -52,7 +52,7 @@ window.addEventListener("keyup", (event) => {
         keyboard.SPACE = false;
     }
     if (event.code == "KeyD") {
-        keyboard.D = true
+        keyboard.D = false;
     }
 });
 
