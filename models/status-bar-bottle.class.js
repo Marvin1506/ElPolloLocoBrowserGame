@@ -29,7 +29,7 @@ class StatusBarBottles extends DrawableObject {
     }
 
 
-
+    //bar percentage update with the index for the pictures
     resolveImageIndex() {
         if (this.percentage >= 100) {
             return 5;
