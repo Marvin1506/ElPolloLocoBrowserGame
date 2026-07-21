@@ -49,6 +49,13 @@ class World {
                 //console.log("Collision with character", this.character.energy);
             }
         });
+        this.level.bottles.forEach( (bottle) => {
+            if(this.character.isColliding(bottle)) {
+                this.character.hit();
+                this.statusBarBottles.setPercentage(this.statusBarBottles.percentage);
+                //console.log("Collision with character", this.character.energy);
+            }
+        });
     }
 
     draw() {
