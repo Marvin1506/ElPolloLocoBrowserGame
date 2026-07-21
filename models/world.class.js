@@ -8,7 +8,6 @@ class World {
     statusBar = new StatusBar();
     statusBarCoins = new StatusBarCoins();
     statusBarBottles = new StatusBarBottles();
-    groundBottles = new Bottle();
     throwableObjects = [];
 
     constructor(canvas, keyboard) { // canvas and keyboard are passed as parameters to the constructor function
