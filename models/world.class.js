@@ -41,6 +41,20 @@ class World {
         }
     }
 
+    checkBottleCollisions() {
+        this.level.bottles.forEach((bottle, index) => {
+            if (this.character.isColliding(bottle)) {
+                let newPercentage = Math.min(
+                    this.statusBarBottles.percentage + 20,
+                    100
+                );
+
+                this.statusBarBottles.setPercentage(newPercentage);
+                this.level.bottles.splice(index, 1);
+            }
+        });
+    }
+
     checkCollisions() {
         this.level.enemies.forEach( (enemy) => {
             if(this.character.isColliding(enemy)) {
@@ -49,13 +63,7 @@ class World {
                 //console.log("Collision with character", this.character.energy);
             }
         });
-        this.level.bottles.forEach( (bottle) => {
-            if(this.character.isColliding(bottle)) {
-                this.character.hit();
-                this.statusBarBottles.setPercentage(this.statusBarBottles.percentage);
-                //console.log("Collision with character", this.character.energy);
-            }
-        });
+        this.checkBottleCollisions();
     }
 
     draw() {
