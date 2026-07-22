@@ -23,6 +23,8 @@ class ThrowableObject extends movableObject {
         right: 20 //30
     } 
 
+    hasHit = false;
+
     constructor(x, y) {
         super().loadImage("img/6_salsa_bottle/salsa_bottle.png");
         this.loadImages(this.IMAGES_THROWING);
@@ -43,7 +45,17 @@ class ThrowableObject extends movableObject {
             this.x += 10;
         }, 25);
         setInterval(() => {
-            this.playAnimation(this.IMAGES_THROWING);
-        }, 50);
+            if (this.hasHit) {
+                this.playAnimation(this.IMAGES_HITTING);
+            } else {
+                this.playAnimation(this.IMAGES_THROWING);
+            }
+        }, 80);
+    }
+
+    splash() {
+        this.hasHit = true;
+        this.speedY = 0;
+        this.currentImage = 0;
     }
 }

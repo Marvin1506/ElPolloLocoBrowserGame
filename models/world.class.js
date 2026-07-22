@@ -33,7 +33,22 @@ class World {
         setInterval(() => {
             this.checkBottleCollisions();
         }, 100);
+         setInterval(() => {
+            this.checkBottleCollisionsWithEnemyChicken();
+        }, 100);
     }
+
+    checkBottleCollisionsWithEnemyChicken() {
+    this.throwableObjects.forEach((bottle) => {
+        this.level.enemies.forEach((enemy) => {
+            if (enemy instanceof Chicken && !enemy.isDead && !bottle.hasHit && bottle.isColliding(enemy)
+            ) {
+                enemy.die();
+                bottle.splash();
+            }
+        });
+    });
+}
 
     checkThrowObjects() {
         if (this.keyboard.D && this.statusBarBottles.percentage >= 20) {
