@@ -41,7 +41,7 @@ class World {
     checkBottleCollisionsWithEnemyChicken() {
     this.throwableObjects.forEach((bottle) => {
         this.level.enemies.forEach((enemy) => {
-            if (enemy instanceof Chicken && !enemy.isDead && !bottle.hasHit && bottle.isColliding(enemy)
+            if (enemy instanceof Chicken && !enemy.isDeadChicken && !bottle.hasHit && bottle.isColliding(enemy)
             ) {
                 enemy.die();
                 bottle.splash();
@@ -79,7 +79,7 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach( (enemy) => {
-            if(this.character.isColliding(enemy)) {
+            if(!enemy.isDeadChicken && this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
                 //console.log("Collision with character", this.character.energy);
