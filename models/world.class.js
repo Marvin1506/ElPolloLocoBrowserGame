@@ -26,9 +26,12 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
-        }, 300);
+        }, 200);
          setInterval(() => {
             this.checkThrowObjects();
+        }, 100);
+        setInterval(() => {
+            this.checkBottleCollisions();
         }, 100);
     }
 
@@ -67,7 +70,6 @@ class World {
                 //console.log("Collision with character", this.character.energy);
             }
         });
-        this.checkBottleCollisions();
     }
 
     draw() {
