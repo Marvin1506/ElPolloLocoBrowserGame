@@ -32,6 +32,7 @@ class World {
         }, 100);
         setInterval(() => {
             this.checkBottleCollisions();
+            this.checkCoinCollisions();
         }, 100);
          setInterval(() => {
             this.checkBottleCollisionsWithEnemyChicken();
@@ -79,6 +80,20 @@ class World {
         });
     }
 
+    checkCoinCollisions() {
+        this.level.coins.forEach((coin, index) => {
+            if (this.character.isColliding(coin)) {
+                let newPercentage = Math.min(
+                    this.statusBarCoins.percentage + 20,
+                    100
+                );
+
+                this.statusBarCoins.setPercentage(newPercentage);
+                this.level.coins.splice(index, 1);
+            }
+        });
+    }
+
     checkCollisions() {
         this.level.enemies.forEach( (enemy) => {
             if(!enemy.isDeadChicken && this.character.isColliding(enemy)) {
@@ -98,6 +113,7 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects); //add all background objects to the map
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.bottles);
+        this.addObjectsToMap(this.level.coins);
 
         this.ctx.translate(-this.camera_x, 0);
         // ----Space for fixed objects----
