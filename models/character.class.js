@@ -3,6 +3,7 @@ class Character extends movableObject {
     y = 60; // 150
     speed = 10;
     world;
+    lastInput = Date.now();
     offset = {
         top: 120, //120 offset für pepe
         bottom: 30, //30
@@ -46,7 +47,7 @@ class Character extends movableObject {
         "img/2_character_pepe/4_hurt/H-43.png",
     ];
 
-    IMAGES_AFK = [
+    IMAGES_IDLE = [
         "img/2_character_pepe/1_idle/idle/I-1.png",
         "img/2_character_pepe/1_idle/idle/I-2.png",
         "img/2_character_pepe/1_idle/idle/I-3.png",
@@ -59,7 +60,7 @@ class Character extends movableObject {
         "img/2_character_pepe/1_idle/idle/I-10.png",
     ];
 
-    IMAGES_LONG_AFK = [
+    IMAGES_AFK = [
         "img/2_character_pepe/1_idle/long_idle/I-11.png",
         "img/2_character_pepe/1_idle/long_idle/I-12.png",
         "img/2_character_pepe/1_idle/long_idle/I-13.png",
@@ -78,10 +79,18 @@ class Character extends movableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_AFK);
-        this.loadImages(this.IMAGES_LONG_AFK);
         this.animate();
         this.applyGravity();
+    }
+
+    isIdle() {
+        return Date.now() - this.lastInput > 5000;
+    }
+
+    isLongAfk() {
+        return Date.now() - this.lastInput > 10000;
     }
 
     animate() {
@@ -116,12 +125,14 @@ class Character extends movableObject {
              else if(this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             }
-              else {
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT){
                     //walk animation how often the image changes
-                    this.playAnimation(this.IMAGES_WALKING);
-                    }
-            }
+                this.playAnimation(this.IMAGES_WALKING);
+            } else if (this.isIdle()) {
+                this.playAnimation(this.IMAGES_IDLE);
+            } else if (this.isLongAfk()) {
+                this.playAnimation(this.IMAGES_AFK);
+            } 
         }, 100);
     }
 
