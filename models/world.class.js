@@ -35,15 +35,17 @@ class World {
         }, 100);
          setInterval(() => {
             this.checkBottleCollisionsWithEnemyChicken();
-        }, 100);
+        }, 1000 / 60);
     }
 
     checkBottleCollisionsWithEnemyChicken() {
     this.throwableObjects.forEach((bottle) => {
         this.level.enemies.forEach((enemy) => {
-            if (enemy instanceof Chicken && !enemy.isDeadChicken && !bottle.hasHit && bottle.isColliding(enemy)
-            ) {
+            if (enemy instanceof Chicken && !enemy.isDeadChicken && !bottle.hasHit && bottle.isColliding(enemy)) {
                 enemy.die();
+                bottle.splash();
+            } else if(enemy instanceof ChickenSmall && !enemy.isDeadChickenSmall && !bottle.hasHit && bottle.isColliding(enemy)) {
+                enemy.dieChickenSmall();
                 bottle.splash();
             }
         });
