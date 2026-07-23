@@ -3,7 +3,6 @@ class Character extends movableObject {
     y = 60; // 150
     speed = 10;
     world;
-    lastInput = Date.now();
     offset = {
         top: 120, //120 offset für pepe
         bottom: 30, //30
@@ -86,7 +85,7 @@ class Character extends movableObject {
     }
 
     isIdle() {
-        return Date.now() - this.lastInput > 5000;
+        return Date.now() - this.lastInput > 10;
     }
 
     isLongAfk() {
@@ -97,6 +96,9 @@ class Character extends movableObject {
         // how quick the character moves and takes the keyboard input
         // walking sound pause and walking sound play in left and right movement later
         setInterval( () => {
+            if (this.world.keyboard.RIGHT ||this.world.keyboard.LEFT ||this.world.keyboard.SPACE ||this.world.keyboard.D) {
+                this.lastInput = Date.now();
+            }
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
@@ -128,10 +130,10 @@ class Character extends movableObject {
             else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT){
                     //walk animation how often the image changes
                 this.playAnimation(this.IMAGES_WALKING);
-            } else if (this.isIdle()) {
-                this.playAnimation(this.IMAGES_IDLE);
             } else if (this.isLongAfk()) {
                 this.playAnimation(this.IMAGES_AFK);
+            } else if (this.isIdle()) {
+                this.playAnimation(this.IMAGES_IDLE);
             } 
         }, 100);
     }
