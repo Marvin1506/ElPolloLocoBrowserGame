@@ -53,6 +53,9 @@ class World {
             } else if(enemy instanceof ChickenSmall && !enemy.isDeadChickenSmall && !bottle.hasHit && bottle.isColliding(enemy)) {
                 enemy.dieChickenSmall();
                 bottle.splash();
+            } else if (enemy instanceof Endboss && !enemy.isDeadChickenSmall && !bottle.hasHit && bottle.isColliding(enemy)) {
+
+                bottle.splash();
             }
         });
     });
