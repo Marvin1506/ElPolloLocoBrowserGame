@@ -33,6 +33,14 @@ class movableObject extends DrawableObject {
         this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
+    isJumpingOn(enemy) {
+    return this.speedY < 0 &&
+        this.x + this.width - this.offset.right > enemy.x + enemy.offset.left &&
+        this.x + this.offset.left < enemy.x + enemy.width - enemy.offset.right &&
+        this.y + this.height - this.offset.bottom >= enemy.y + enemy.offset.top &&
+        this.y + this.height - this.offset.bottom <= enemy.y + enemy.offset.top + 20;
+}
+
     hit() {
         this.energy -= 20;
         if(this.energy < 0) {

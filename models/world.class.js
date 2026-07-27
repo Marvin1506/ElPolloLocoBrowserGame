@@ -25,6 +25,9 @@ class World {
 
     run() {
         setInterval(() => {
+            this.checkPepeJumpCollision();
+        }, 1000 / 60);
+        setInterval(() => {
             this.checkCollisions();
         }, 200);
          setInterval(() => {
@@ -100,6 +103,20 @@ class World {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
                 //console.log("Collision with character", this.character.energy);
+            }
+        });
+    }
+
+    checkPepeJumpCollision() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isJumpingOn(enemy)) {
+                if (enemy instanceof Chicken && !enemy.isDeadChicken) {
+                    enemy.die();
+                    this.character.speedY = 20;
+                } else if (enemy instanceof ChickenSmall && !enemy.isDeadChickenSmall) {
+                    enemy.dieChickenSmall();
+                    this.character.speedY = 20;
+                }
             }
         });
     }
