@@ -54,7 +54,8 @@ class World {
                 enemy.dieChickenSmall();
                 bottle.splash();
             } else if (enemy instanceof Endboss && !enemy.isDeadChickenSmall && !bottle.hasHit && bottle.isColliding(enemy)) {
-
+                let newPercentage = Math.max(this.statusBarBoss.percentage - 20);
+                this.statusBarBoss.setPercentage(newPercentage);
                 bottle.splash();
             }
         });
