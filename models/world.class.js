@@ -26,7 +26,7 @@ class World {
     run() {
         setInterval(() => {
             this.checkPepeJumpCollision();
-        }, 1000 / 60);
+        }, 1000 / 120);
         setInterval(() => {
             this.checkCollisions();
         }, 200);
