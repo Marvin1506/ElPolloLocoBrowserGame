@@ -145,8 +145,6 @@ class World {
     checkBossBarPosition() {
         if (this.character.x >= 2000) {
             this.statusBarBoss.visible = true;
-            this.statusBarBoss.x = 500;
-            this.statusBarBoss.y = 0;
         }
     }
 
