@@ -98,6 +98,9 @@ class World {
     }
 
     checkCollisions() {
+        if (this.character.ignoreEnemyCollision) {
+            return;
+        }
         this.level.enemies.forEach( (enemy) => {
             if(!enemy.isDeadChicken && !enemy.isDeadChickenSmall && this.character.isColliding(enemy)) {
                 this.character.hit();
@@ -112,13 +115,22 @@ class World {
             if (this.character.isJumpingOn(enemy)) {
                 if (enemy instanceof Chicken && !enemy.isDeadChicken) {
                     enemy.die();
-                    this.character.speedY = 20;
+                    this.handleJumpOnEnemy();
                 } else if (enemy instanceof ChickenSmall && !enemy.isDeadChickenSmall) {
                     enemy.dieChickenSmall();
-                    this.character.speedY = 20;
+                    this.handleJumpOnEnemy();
                 }
             }
         });
+    }
+
+    handleJumpOnEnemy() {
+        this.character.speedY = 20;
+        this.character.ignoreEnemyCollision = true;
+
+        setTimeout(() => {
+            this.character.ignoreEnemyCollision = false;
+        }, 150);
     }
 
     draw() {
