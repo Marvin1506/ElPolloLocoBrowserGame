@@ -45,22 +45,22 @@ class World {
     }
 
     checkBottleCollisionsWithEnemyChicken() {
-    this.throwableObjects.forEach((bottle) => {
-        this.level.enemies.forEach((enemy) => {
-            if (enemy instanceof Chicken && !enemy.isDeadChicken && !bottle.hasHit && bottle.isColliding(enemy)) {
-                enemy.die();
-                bottle.splash();
-            } else if(enemy instanceof ChickenSmall && !enemy.isDeadChickenSmall && !bottle.hasHit && bottle.isColliding(enemy)) {
-                enemy.dieChickenSmall();
-                bottle.splash();
-            } else if (enemy instanceof Endboss && !enemy.isDeadChickenSmall && !bottle.hasHit && bottle.isColliding(enemy)) {
-                let newPercentage = Math.max(this.statusBarBoss.percentage - 20);
-                this.statusBarBoss.setPercentage(newPercentage);
-                bottle.splash();
-            }
+        this.throwableObjects.forEach((bottle) => {
+            this.level.enemies.forEach((enemy) => {
+                if (enemy instanceof Chicken && !enemy.isDeadChicken && !bottle.hasHit && bottle.isColliding(enemy)) {
+                    enemy.die();
+                    bottle.splash();
+                } else if(enemy instanceof ChickenSmall && !enemy.isDeadChickenSmall && !bottle.hasHit && bottle.isColliding(enemy)) {
+                    enemy.dieChickenSmall();
+                    bottle.splash();
+                } else if (enemy instanceof Endboss && !enemy.isDeadChickenSmall && !bottle.hasHit && bottle.isColliding(enemy)) {
+                    enemy.hit();
+                    this.statusBarBoss.setPercentage(enemy.energy);
+                    bottle.splash();
+                }
+            });
         });
-    });
-}
+    }
 
     checkThrowObjects() {
         if (this.keyboard.D && this.statusBarBottles.percentage >= 20) {

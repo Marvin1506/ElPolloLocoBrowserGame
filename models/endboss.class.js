@@ -2,7 +2,8 @@ class Endboss extends movableObject {
 
     height = 400;
     width = 250;
-    y = 45;
+    y = 50;
+    energy = 100;
 
     offset = {
         top: 110, //120 offset für pepe
@@ -22,18 +23,43 @@ class Endboss extends movableObject {
         "img/4_enemie_boss_chicken/2_alert/G12.png",
     ];
 
+    IMAGES_DEAD = [
+        "img/4_enemie_boss_chicken/5_dead/G24.png",
+        "img/4_enemie_boss_chicken/5_dead/G25.png",
+        "img/4_enemie_boss_chicken/5_dead/G26.png",
+    ];
+
     constructor() {
         super().loadImage("img/4_enemie_boss_chicken/2_alert/G5.png");
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_DEAD);
         this.x = 2600;
 
         this.animate();
     }
 
+    hit() {
+        this.energy -= 20;
+        if (this.energy < 0) {
+            this.energy = 0;
+        }
+    }
+
+    isDead() {
+        return this.energy === 0;
+    }
+
     animate() {
-        
-        setInterval( () => {
-            this.playAnimation(this.IMAGES_WALKING);
+        setInterval(() => {
+            if (this.isDead()) {
+                if(!this.deadAnimationStarted){
+                    this.currentImage = 0;
+                    this.deadAnimationStarted = true;
+                }
+                this.playDeadAnimation(this.IMAGES_DEAD);
+            } else {
+                this.playAnimation(this.IMAGES_WALKING);
+            }
         }, 200);
     }
 
