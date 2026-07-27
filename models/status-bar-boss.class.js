@@ -1,5 +1,5 @@
 class StatusBarBoss extends DrawableObject {
-
+    visible = false;
 
     IMAGES = [
         "img/7_statusbars/2_statusbar_endboss/green/green0.png",

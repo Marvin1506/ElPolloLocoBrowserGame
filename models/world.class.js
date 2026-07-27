@@ -42,6 +42,9 @@ class World {
          setInterval(() => {
             this.checkBottleCollisionsWithEnemyChicken();
         }, 1000 / 60);
+        setInterval(() => {
+            this.checkBossBarPosition();
+        }, 100);
     }
 
     checkBottleCollisionsWithEnemyChicken() {
@@ -139,6 +142,14 @@ class World {
         }, 150);
     }
 
+    checkBossBarPosition() {
+        if (this.character.x >= 2000) {
+            this.statusBarBoss.visible = true;
+            this.statusBarBoss.x = 500;
+            this.statusBarBoss.y = 0;
+        }
+    }
+
     draw() {
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // delete everything on the canvas and start from scratch
@@ -155,7 +166,9 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBarCoins);
         this.addToMap(this.statusBarBottles);
-        this.addToMap(this.statusBarBoss);
+        if (this.statusBarBoss.visible) {
+            this.addToMap(this.statusBarBoss);
+        }
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.enemies);
