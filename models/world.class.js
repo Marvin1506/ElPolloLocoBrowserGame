@@ -99,7 +99,7 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach( (enemy) => {
-            if(!enemy.isDeadChicken && this.character.isColliding(enemy)) {
+            if(!enemy.isDeadChicken && !enemy.isDeadChickenSmall && this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
                 //console.log("Collision with character", this.character.energy);
