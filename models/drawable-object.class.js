@@ -33,8 +33,8 @@ class DrawableObject {
         });
     }
 
-    drawFrame(ctx) {
-        if(this instanceof Endboss){
+    /*drawFrame(ctx) {
+        if(this instanceof Character || this instanceof ThrowableObject || this instanceof Endboss){
             ctx.beginPath();
             ctx.lineWidth = "2";
             ctx.strokeStyle = "blue";
@@ -52,5 +52,5 @@ class DrawableObject {
             );
             ctx.stroke();
         }
-    }
+    }*/
 }
