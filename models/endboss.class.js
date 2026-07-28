@@ -8,12 +8,9 @@ class Endboss extends movableObject {
     speed = 0.5;
 
     bossActivated = false;
-    walkStarted = false;
-    alertStarted = false;
-    attackStarted = false;
-
-    walkStartTime = 0;
-
+    bossState = "waiting";
+    attackImageIndex = 0;
+    walkPhaseStartTime = 0;
 
     offset = {
         top: 110, //120 offset für pepe
@@ -101,7 +98,7 @@ class Endboss extends movableObject {
 
     animateMovement() {
         setInterval(() => {
-            if (this.walkStarted && this.isWalking() && !this.isDead()) {
+            if (this.bossState === "walking" && !this.isDead() && !this.isHurt()) {
                 this.moveLeft();
             }
         }, 1000 / 60);
@@ -114,23 +111,20 @@ class Endboss extends movableObject {
             return;
         }
 
-        this.startWalking();
-
-        if (this.isWalking()) {
-            this.playAnimation(this.IMAGES_WALK);
+        if (this.bossState === "walking") {
+            this.handleWalkingPhase();
             return;
         }
 
-        if (this.playAlertAnimation()) {
-            return;
+        if (this.bossState === "attacking") {
+            this.handleAttackPhase();
         }
-
-        this.startAttacking();
     }
 
     isWaitingForPepe(pepeX) {
         if (!this.bossActivated && pepeX >= 2000) {
             this.bossActivated = true;
+            this.startWalkingPhase();
         }
 
         if (!this.bossActivated) {
@@ -141,46 +135,39 @@ class Endboss extends movableObject {
         return false;
     }
 
-    startWalking() {
-        if (!this.walkStarted) {
-            this.walkStarted = true;
-            this.walkStartTime = Date.now();
-            this.currentImage = 0;
-        }
-    }
-    
-    isWalking() {
-        const walkDuration = Date.now() - this.walkStartTime;
-        return walkDuration < 2000;
+    startWalkingPhase() {
+        this.bossState = "walking";
+        this.walkPhaseStartTime = Date.now();
+        this.currentImage = 0;
+        this.speed = 2;
     }
 
-    playAlertAnimation() {
-        if (!this.alertStarted) {
-            this.alertStarted = true;
-            this.currentImage = 0;
-        }
+    handleWalkingPhase() {
+        this.playAnimation(this.IMAGES_WALK);
 
-        if (!this.alertAnimationFinished()) {
-            this.playAnimation(this.IMAGES_ALERT);
-            return true;
-        }
+        const walkDuration = Date.now() - this.walkPhaseStartTime;
 
-        return false;
+        if (walkDuration >= 1200) {
+            this.startAttackPhase();
+        }
     }
 
-    startAttacking() {
-        if (!this.attackStarted) {
-            this.attackStarted = true;
-            this.currentImage = 0;
-            this.speed = 5;
-        }
-
-        this.playAnimation(this.IMAGES_ATTACK);
-        this.moveLeft();
+    startAttackPhase() {
+        this.bossState = "attacking";
+        this.attackImageIndex = 0;
+        this.speed = 0;
     }
 
-    alertAnimationFinished() {
-        return this.currentImage >= this.IMAGES_ALERT.length;
+    handleAttackPhase() {
+        if (this.attackImageIndex < this.IMAGES_ATTACK.length) {
+            const path = this.IMAGES_ATTACK[this.attackImageIndex];
+
+            this.img = this.imageCache[path];
+            this.attackImageIndex++;
+            return;
+        }
+
+        this.startWalkingPhase();
     }
 
     handleDeadAnimation() {
