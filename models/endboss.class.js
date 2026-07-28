@@ -63,7 +63,7 @@ class Endboss extends movableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
         this.x = 2600;
-
+        this.speed = 0.15 + Math.random() * 0.25;
         this.animate();
     }
 
@@ -74,17 +74,74 @@ class Endboss extends movableObject {
     animate() {
         setInterval(() => {
             if (this.isDead()) {
-                if(!this.deadAnimationStarted){
-                    this.currentImage = 0;
-                    this.deadAnimationStarted = true;
-                }
-                this.playDeadAnimation(this.IMAGES_DEAD);
-            } else if(this.isHurt()){
-                this.playAnimation(this.IMAGES_HURT);
-            } else {
-                this.playAnimation(this.IMAGES_WALK);
+                this.handleDeadAnimation();
+                return;
             }
+
+            if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
+                return;
+            }
+
+            this.handleBossAnimation();
         }, 200);
     }
 
+    handleBossAnimation() {
+        const pepeX = this.world.character.x;
+
+        // Pepe hat den Endboss-Bereich noch nicht erreicht
+        if (pepeX < 2000) {
+            this.playAnimation(this.IMAGES_ALERT);
+            return;
+        }
+
+        // Start des 2-sekündigen Laufens
+        if (!this.walkStarted) {
+            this.walkStarted = true;
+            this.walkStartTime = Date.now();
+            this.currentImage = 0;
+        }
+
+        const walkDuration = Date.now() - this.walkStartTime;
+
+        // Zwei Sekunden laufen
+        if (walkDuration < 2000) {
+            this.playAnimation(this.IMAGES_WALK);
+            this.moveLeft();
+            return;
+        }
+
+        // Alert einmal vollständig abspielen
+        if (!this.alertStarted) {
+            this.alertStarted = true;
+            this.currentImage = 0;
+        }
+
+        if (!this.alertAnimationFinished()) {
+            this.playAnimation(this.IMAGES_ALERT);
+            return;
+        }
+
+        // Danach dauerhaft angreifen
+        if (!this.attackStarted) {
+            this.attackStarted = true;
+            this.currentImage = 0;
+        }
+
+        this.playAnimation(this.IMAGES_ATTACK);
+    }
+
+    alertAnimationFinished() {
+        return this.currentImage >= this.IMAGES_ALERT.length;
+    }
+
+    handleDeadAnimation() {
+        if (!this.deadAnimationStarted) {
+            this.currentImage = 0;
+            this.deadAnimationStarted = true;
+        }
+
+        this.playDeadAnimation(this.IMAGES_DEAD);
+    }
 }

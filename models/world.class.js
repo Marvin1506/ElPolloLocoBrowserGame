@@ -23,6 +23,9 @@ class World {
 
     setWorld() {    // set the world property of the character to the current instance of the World class so that the character can access the properties and methods of the World class
         this.character.world = this;
+         this.level.enemies.forEach(enemy => {
+            enemy.world = this;
+        });
     }
 
     run() {
