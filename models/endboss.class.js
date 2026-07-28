@@ -89,29 +89,48 @@ class Endboss extends movableObject {
     handleBossAnimation() {
         const pepeX = this.world.character.x;
 
-        // Pepe hat den Endboss-Bereich noch nicht erreicht
-        if (pepeX < 2000) {
-            this.playAnimation(this.IMAGES_ALERT);
+        if (this.isWaitingForPepe(pepeX)) {
             return;
         }
 
-        // Start des 2-sekündigen Laufens
-        if (!this.walkStarted) {
-            this.walkStarted = true;
-            this.walkStartTime = Date.now();
-            this.currentImage = 0;
-        }
+        this.startWalking();
 
-        const walkDuration = Date.now() - this.walkStartTime;
-
-        // Zwei Sekunden laufen
-        if (walkDuration < 2000) {
+        if (this.isWalking()) {
             this.playAnimation(this.IMAGES_WALK);
             this.moveLeft();
             return;
         }
 
-        // Alert einmal vollständig abspielen
+        if (this.playAlertAnimation()) {
+            return;
+        }
+
+        this.startAttacking();
+    }
+
+    isWaitingForPepe(pepeX) {
+        if (pepeX < 2000) {
+            this.playAnimation(this.IMAGES_ALERT);
+            return true;
+        }
+
+        return false;
+    }
+
+    startWalking() {
+        if (!this.walkStarted) {
+            this.walkStarted = true;
+            this.walkStartTime = Date.now();
+            this.currentImage = 0;
+        }
+    }
+    
+    isWalking() {
+        const walkDuration = Date.now() - this.walkStartTime;
+        return walkDuration < 2000;
+    }
+
+    playAlertAnimation() {
         if (!this.alertStarted) {
             this.alertStarted = true;
             this.currentImage = 0;
@@ -119,10 +138,13 @@ class Endboss extends movableObject {
 
         if (!this.alertAnimationFinished()) {
             this.playAnimation(this.IMAGES_ALERT);
-            return;
+            return true;
         }
 
-        // Danach dauerhaft angreifen
+        return false;
+    }
+
+    startAttacking() {
         if (!this.attackStarted) {
             this.attackStarted = true;
             this.currentImage = 0;
