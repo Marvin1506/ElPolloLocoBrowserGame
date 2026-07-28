@@ -138,6 +138,7 @@ class Endboss extends movableObject {
     startWalkingPhase() {
         this.bossState = "walking";
         this.walkPhaseStartTime = Date.now();
+        this.walkDuration = 700 + Math.random() * 900;
         this.currentImage = 0;
         this.speed = 2;
     }
@@ -145,9 +146,9 @@ class Endboss extends movableObject {
     handleWalkingPhase() {
         this.playAnimation(this.IMAGES_WALK);
 
-        const walkDuration = Date.now() - this.walkPhaseStartTime;
+        const walkTime = Date.now() - this.walkPhaseStartTime;
 
-        if (walkDuration >= 1200) {
+        if (walkTime >= this.walkDuration) {
             this.startAttackPhase();
         }
     }
