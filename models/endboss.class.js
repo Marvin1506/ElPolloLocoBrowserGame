@@ -7,6 +7,13 @@ class Endboss extends movableObject {
     speedY = 0;
     speed = 0.5;
 
+    bossActivated = false;
+    walkStarted = false;
+    alertStarted = false;
+    attackStarted = false;
+
+    walkStartTime = 0;
+
 
     offset = {
         top: 110, //120 offset für pepe
@@ -122,7 +129,11 @@ class Endboss extends movableObject {
     }
 
     isWaitingForPepe(pepeX) {
-        if (pepeX < 2000) {
+        if (!this.bossActivated && pepeX >= 2000) {
+            this.bossActivated = true;
+        }
+
+        if (!this.bossActivated) {
             this.playAnimation(this.IMAGES_ALERT);
             return true;
         }
@@ -161,9 +172,11 @@ class Endboss extends movableObject {
         if (!this.attackStarted) {
             this.attackStarted = true;
             this.currentImage = 0;
+            this.speed = 5;
         }
 
         this.playAnimation(this.IMAGES_ATTACK);
+        this.moveLeft();
     }
 
     alertAnimationFinished() {
