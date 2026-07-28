@@ -96,7 +96,7 @@ class Endboss extends movableObject {
             }
 
             this.handleBossImages();
-        }, 200);
+        }, 100);
     }
 
     animateMovement() {
