@@ -8,10 +8,10 @@ const throwBtn = document.getElementById("throw");
 
 function init() {
     canvas = document.getElementById("canvas");
+}
+
+function initGame() {
     world = new World(canvas, keyboard);
-
-
-    console.log("My character is", world.character);
 }
 
 window.addEventListener("keydown", (event) => { // event listener that listens for keydown events and sets the corresponding property of the keyboard object to true when the key is pressed

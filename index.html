@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<html translate="no">
+<html lang="en" translate="no">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,19 +9,51 @@
 </head>
 
 <body onload="init()">
-    
-<h1>El Pollo Loco</h1>
+
+    <div id="start-screen" class="start-screen">
+
+        <img src="./img/9_intro_outro_screens/start/startscreen_1.png" alt="El Pollo Loco Startscreen" class="start-screen-image">
+
+        <div class="start-menu">
+            <button onclick="startGame()" class="start-menu-button">
+                Play
+            </button>
+
+            <button onclick="showControls()" class="start-menu-button">
+                Controls
+            </button>
+
+            <button onclick="toggleSound()" class="start-menu-button">
+                Sound
+            </button>
+        </div>
+
+        <div id="controls-screen" class="controls-screen display-none">
+            <h2>Controls</h2>
+
+            <div class="controls-list">
+                <p>← / → Move</p>
+                <p>Space Jump</p>
+                <p>D Throw bottle</p>
+            </div>
+
+            <button onclick="hideControls()" class="start-menu-button">
+                Back
+            </button>
+        </div>
+    </div>
+
+    <h1>El Pollo Loco</h1>
 
     <div id="game-content-fullscreen" class="game-content">
-        <canvas id="canvas" width="720" height="480">
-
-        </canvas>
+        <canvas id="canvas" width="720" height="480"></canvas>
 
         <div class="mobile-button-flexbox" id="mobile-button-flexbox">
             <div class="mobile-button-div-move-left-right">
                 <button id="left" class="control-panel">
                     ◀
                 </button>
+
                 <button id="right" class="control-panel">
                     ▶
                 </button>
@@ -31,34 +63,35 @@
                 <button id="jump" class="control-panel">
                     ⮝
                 </button>
+
                 <button id="throw" class="control-panel">
-                    <img class="throw-bottle-icon-mobile" src="img/6_salsa_bottle/salsa_bottle.png" alt="" srcset="">
+                    <img class="throw-bottle-icon-mobile" src="img/6_salsa_bottle/salsa_bottle.png" alt="Throw bottle">
                 </button>
             </div>
         </div>
     </div>
+
+    <script src="./js/script.js"></script>
+    <script src="./models/world.class.js"></script>
+    <script src="./models/keyboard.class.js"></script>
+    <script src="./models/drawable-object.class.js"></script>
+    <script src="./models/movable-object.class.js"></script>
+    <script src="./models/background-object.class.js"></script>
+    <script src="./models/cloud.class.js"></script>
+    <script src="./models/character.class.js"></script>
+    <script src="./models/throwable-object.class.js"></script>
+    <script src="./models/chicken.class.js"></script>
+    <script src="./models/chicken-small.class.js"></script>
+    <script src="./models/level.class.js"></script>
+    <script src="./models/endboss.class.js"></script>
+    <script src="./models/status-bar.class.js"></script>
+    <script src="./models/status-bar-coins.class.js"></script>
+    <script src="./models/status-bar-bottle.class.js"></script>
+    <script src="./models/status-bar-boss.class.js"></script>
+    <script src="./models/bottle.class.js"></script>
+    <script src="./models/coin.class.js"></script>
+    <script src="./levels/level1.js"></script>
+    <script src="./js/game.js"></script>
+
 </body>
-
-<script src="./js/script.js"></script>
-<script src="./models/world.class.js"></script>
-<script src="./models/keyboard.class.js"></script>
-<script src="./models/drawable-object.class.js"></script>
-<script src="./models/movable-object.class.js"></script>
-<script src="./models/background-object.class.js"></script>
-<script src="./models/cloud.class.js"></script>
-<script src="./models/character.class.js"></script>
-<script src="./models/throwable-object.class.js"></script>
-<script src="./models/chicken.class.js"></script>
-<script src="./models/chicken-small.class.js"></script>
-<script src="./models/level.class.js"></script>
-<script src="./models/endboss.class.js"></script>
-<script src="./models/status-bar.class.js"></script>
-<script src="./models/status-bar-coins.class.js"></script>
-<script src="./models/status-bar-bottle.class.js"></script>
-<script src="./models/status-bar-boss.class.js"></script>
-<script src="./models/bottle.class.js"></script>
-<script src="./models/coin.class.js"></script>
-<script src="./levels/level1.js"></script>
-<script src="./js/game.js"></script>
-
 </html>

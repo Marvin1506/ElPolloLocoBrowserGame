@@ -22,6 +22,86 @@ canvas {
     display: block;
 }
 
+.start-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.start-screen-image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.start-menu {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    gap: 20px;
+
+    margin-top: 320px;
+}
+
+.start-menu-button {
+    padding: 10px 28px;
+
+    font-family: "zabras", Arial, sans-serif;
+    font-size: 32px;
+    letter-spacing: 3px;
+
+    color: white;
+    background-color: rgba(238, 138, 45, 0.95);
+
+    border: 3px solid white;
+    border-radius: 12px;
+
+    cursor: pointer;
+}
+
+.start-menu-button:hover {
+    transform: scale(1.08);
+    background-color: rgb(221, 104, 26);
+}
+
+.controls-screen {
+    position: absolute;
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    min-width: 300px;
+    padding: 30px;
+
+    color: white;
+    background-color: rgba(0, 0, 0, 0.85);
+
+    border: 3px solid white;
+    border-radius: 16px;
+}
+
+.controls-list {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.display-none {
+    display: none;
+}
+
 @font-face {
     font-family: 'zabras';
     src:url('img/10_font/zabars.ttf') format('woff'), /* Modern Browsers */
