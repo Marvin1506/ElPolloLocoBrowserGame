@@ -5,6 +5,7 @@ class Endboss extends movableObject {
     y = 50;
     energy = 100;
     speedY = 0;
+    speed = 0.5;
 
 
     offset = {
@@ -71,6 +72,11 @@ class Endboss extends movableObject {
     }
 
     animate() {
+        this.animateImages();
+        this.animateMovement();
+    }
+
+    animateImages() {
         setInterval(() => {
             if (this.isDead()) {
                 this.handleDeadAnimation();
@@ -82,11 +88,19 @@ class Endboss extends movableObject {
                 return;
             }
 
-            this.handleBossAnimation();
+            this.handleBossImages();
         }, 200);
     }
 
-    handleBossAnimation() {
+    animateMovement() {
+        setInterval(() => {
+            if (this.walkStarted && this.isWalking() && !this.isDead()) {
+                this.moveLeft();
+            }
+        }, 1000 / 60);
+    }
+
+    handleBossImages() {
         const pepeX = this.world.character.x;
 
         if (this.isWaitingForPepe(pepeX)) {
@@ -97,7 +111,6 @@ class Endboss extends movableObject {
 
         if (this.isWalking()) {
             this.playAnimation(this.IMAGES_WALK);
-            this.moveLeft();
             return;
         }
 
