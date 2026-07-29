@@ -5,6 +5,9 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
+    animationFrameId;
+    gameStopped = false;
+
     statusBar = new StatusBar();
     statusBarCoins = new StatusBarCoins();
     statusBarBottles = new StatusBarBottles();
@@ -19,6 +22,15 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+    }
+
+    stop() {
+        this.gameStopped = true;
+
+        if (this.animationFrameId) {
+            cancelAnimationFrame(this.animationFrameId);
+            this.animationFrameId = null;
+        }
     }
 
     setWorld() {
@@ -157,7 +169,9 @@ class World {
     }
 
     draw() {
-
+        if (this.gameStopped) {
+            return;
+        }
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // delete everything on the canvas and start from scratch
 
         this.ctx.translate(this.camera_x, 0);   //change the origin of the canvas to the right by camera_x pixels
@@ -184,8 +198,8 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
 
         let self = this; // save the current context of the canvas in a variable called self, so that it can be used inside the requestAnimationFrame function
-        requestAnimationFrame(function() {
-            self.draw();
+        this.animationFrameId = requestAnimationFrame(() => {
+            this.draw();
         });
     }
 

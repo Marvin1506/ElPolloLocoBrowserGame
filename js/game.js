@@ -11,11 +11,44 @@ function init() {
 }
 
 function initGame() {
+    startNewGame();
+}
+
+function restartGame(event) {
+    event.currentTarget.blur();
+    stopGame();
+    startNewGame();
+}
+
+function startNewGame() {
+    initLevel();
     world = new World(canvas, keyboard);
+    gameStarted = true;
 }
 
 function stopGame() {
-    
+    if (world) {
+        world.stop();
+    }
+    stopAllIntervals();
+    resetKeyboard();
+    clearCanvas();
+    world = null;
+    gameStarted = false;
+}
+
+function resetKeyboard() {
+    keyboard.LEFT = false;
+    keyboard.RIGHT = false;
+    keyboard.UP = false;
+    keyboard.DOWN = false;
+    keyboard.SPACE = false;
+    keyboard.D = false;
+}
+
+function clearCanvas() {
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function stopAllIntervals() {
