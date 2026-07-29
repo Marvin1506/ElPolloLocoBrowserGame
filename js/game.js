@@ -14,6 +14,14 @@ function initGame() {
     world = new World(canvas, keyboard);
 }
 
+function stopGame() {
+    
+}
+
+function stopAllIntervals() {
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+}
+
 window.addEventListener("keydown", (event) => { // event listener that listens for keydown events and sets the corresponding property of the keyboard object to true when the key is pressed
     if (event.code == "ArrowRight") {
         keyboard.RIGHT = true;
