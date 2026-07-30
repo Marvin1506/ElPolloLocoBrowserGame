@@ -123,8 +123,9 @@ canvas {
     border-radius: 12px;
     cursor: pointer;
     position: fixed;
-    top: 70%;
+    top: 80%;
     left: 50%;
+    transform: translateX(-50%);
     z-index: 5;
 }
 
@@ -132,6 +133,16 @@ canvas {
     width: 720px;
     max-width: 90vw;
     height: auto;
+}
+
+.lost-screen {
+    width: 700px;
+    max-width: 90vw;
+    height: auto;
+}
+
+.opacity {
+    opacity: 0;
 }
 
 @font-face {

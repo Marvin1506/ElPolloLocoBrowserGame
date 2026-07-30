@@ -122,6 +122,9 @@ class Character extends movableObject {
                     this.deadAnimationStarted = true;
                 }
                 this.playDeadAnimation(this.IMAGES_DEAD);
+                if(this.currentImage = 6) {
+                    showGameLostScreen();
+                }
             } else if (this.isHurt()){
                 this.playAnimation(this.IMAGES_HURT);
             }

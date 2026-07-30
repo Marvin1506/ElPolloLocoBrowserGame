@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let gameState = "start";
 const leftBtn = document.getElementById("left");
 const rightBtn = document.getElementById("right");
 const jumpBtn = document.getElementById("jump");
@@ -16,6 +17,11 @@ function initGame() {
 
 function restartGame(event) {
     event.currentTarget.blur();
+    if (gameState === "won") {
+        hideGameWonScreen();
+    } else if (gameState === "lost") {
+        hideGameLostScreen();
+    }
     stopGame();
     startNewGame();
 }
@@ -24,6 +30,7 @@ function startNewGame() {
     initLevel();
     world = new World(canvas, keyboard);
     gameStarted = true;
+    gameState = "playing";
 }
 
 function stopGame() {
@@ -136,3 +143,57 @@ throwBtn.addEventListener("touchend", () => {
     event.preventDefault();
     keyboard.D = false;
 });
+
+function showGameWonScreen() {
+    gameState = "won";
+    const restartScreenPicture = document.getElementById("won-screen");
+    const restartScreenPictureDiv = document.getElementById("end-screen");
+    const restartButton = document.getElementById("restart-button");
+    const canvas = document.getElementById("canvas");
+    const mobileFlexBox = document.getElementById("mobile-button-flexbox");
+    restartScreenPicture.classList.remove("display-none");
+    restartScreenPictureDiv.classList.remove("display-none");
+    restartButton.classList.remove("display-none");
+    canvas.classList.add("opacity");
+    mobileFlexBox.classList.add("display-none");
+}
+
+function hideGameWonScreen() {
+    const restartScreenPicture = document.getElementById("won-screen");
+    const restartScreenPictureDiv = document.getElementById("end-screen");
+    const restartButton = document.getElementById("restart-button");
+    const canvas = document.getElementById("canvas");
+    const mobileFlexBox = document.getElementById("mobile-button-flexbox");
+    restartScreenPicture.classList.add("display-none");
+    restartScreenPictureDiv.classList.add("display-none");
+    restartButton.classList.add("display-none");
+    canvas.classList.remove("opacity");
+    mobileFlexBox.classList.remove("display-none");
+}
+
+function showGameLostScreen() {
+    gameState = "lost";
+    const restartScreenPicture = document.getElementById("lost-screen");
+    const restartScreenPictureDiv = document.getElementById("end-screen");
+    const restartButton = document.getElementById("restart-button");
+    const canvas = document.getElementById("canvas");
+    const mobileFlexBox = document.getElementById("mobile-button-flexbox");
+    restartScreenPicture.classList.remove("display-none");
+    restartScreenPictureDiv.classList.remove("display-none");
+    restartButton.classList.remove("display-none");
+    canvas.classList.add("opacity");
+    mobileFlexBox.classList.add("display-none");
+}
+
+function hideGameLostScreen() {
+    const restartScreenPicture = document.getElementById("lost-screen");
+    const restartScreenPictureDiv = document.getElementById("end-screen");
+    const restartButton = document.getElementById("restart-button");
+    const canvas = document.getElementById("canvas");
+    const mobileFlexBox = document.getElementById("mobile-button-flexbox");
+    restartScreenPicture.classList.add("display-none");
+    restartScreenPictureDiv.classList.add("display-none");
+    restartButton.classList.add("display-none");
+    canvas.classList.remove("opacity");
+    mobileFlexBox.classList.remove("display-none");
+}
