@@ -4,6 +4,9 @@ class Character extends movableObject {
     speed = 10;
     world;
     ignoreEnemyCollision;
+    lastDamageTime = 0;
+    damageCooldown = 700;
+
     offset = {
         top: 120, //120 offset für pepe
         bottom: 30, //30
@@ -91,6 +94,21 @@ class Character extends movableObject {
 
     isLongAfk() {
         return Date.now() - this.lastInput > 10000;
+    }
+
+    canTakeDamage() {
+        return Date.now() - this.lastDamageTime >= this.damageCooldown;
+    }
+
+    takeDamage() {
+        if (!this.canTakeDamage()) {
+            return false;
+        }
+
+        this.hit();
+        this.lastDamageTime = Date.now();
+
+        return true;
     }
 
     animate() {

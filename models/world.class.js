@@ -162,22 +162,9 @@ class World {
     }
 
     handleCharacterCollision() {
-        this.character.hit();
-        this.statusBar.setPercentage(this.character.energy);
-    }
-
-    checkPepeJumpCollision() {
-        this.level.enemies.forEach((enemy) => {
-            if (this.character.isJumpingOn(enemy)) {
-                if (enemy instanceof Chicken && !enemy.isDeadChicken) {
-                    enemy.die();
-                    this.handleJumpOnEnemy();
-                } else if (enemy instanceof ChickenSmall && !enemy.isDeadChickenSmall) {
-                    enemy.dieChickenSmall();
-                    this.handleJumpOnEnemy();
-                }
-            }
-        });
+        if (this.character.takeDamage()) {
+            this.statusBar.setPercentage(this.character.energy);
+        }
     }
 
     handleJumpOnEnemy() {
