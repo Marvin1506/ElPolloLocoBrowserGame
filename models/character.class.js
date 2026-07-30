@@ -3,6 +3,7 @@ class Character extends movableObject {
     y = 60; // 150
     speed = 10;
     world;
+    ignoreEnemyCollision;
     offset = {
         top: 120, //120 offset für pepe
         bottom: 30, //30

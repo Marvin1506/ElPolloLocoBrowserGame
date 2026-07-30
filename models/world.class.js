@@ -159,7 +159,7 @@ class World {
 
         setTimeout(() => {
             this.character.ignoreEnemyCollision = false;
-        }, 150);
+        }, 300);
     }
 
     checkBossBarPosition() {

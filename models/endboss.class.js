@@ -177,5 +177,21 @@ class Endboss extends movableObject {
         }
 
         this.playDeadAnimation(this.IMAGES_DEAD);
+        if (this.currentImage === 2 ) {
+            this.showGameWonScreen();
+        }
+    }
+
+    showGameWonScreen() {
+        const restartScreenPicture = document.getElementById("won-screen");
+        const restartScreenPictureDiv = document.getElementById("end-screen");
+        const restartButton = document.getElementById("restart-button");
+        const canvas = document.getElementById("canvas");
+        const mobileFlexBox = document.getElementById("mobile-button-flexbox");
+        restartScreenPicture.classList.remove("display-none");
+        restartScreenPictureDiv.classList.remove("display-none");
+        restartButton.classList.remove("display-none");
+        canvas.classList.add("display-none");
+        mobileFlexBox.classList.add("display-none");
     }
 }

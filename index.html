@@ -9,7 +9,10 @@
 </head>
 
 <body onload="init()">
-
+    <div id="end-screen" class="end-screen">
+        <img src="./img/You won, you lost/You won A.png" id="won-screen" class="won-screen display-none" alt="">
+        <button id="restart-button" class="restart-button display-none" onclick="restartGame(event)">Restart</button>
+    </div>
     <div id="start-screen" class="start-screen">
 
         <img src="./img/9_intro_outro_screens/start/startscreen_1.png" alt="El Pollo Loco Startscreen" class="start-screen-image">
@@ -50,7 +53,6 @@
 
         <div class="mobile-button-flexbox" id="mobile-button-flexbox">
             <div class="mobile-button-div-move-left-right">
-                <button class="restart-button" onclick="restartGame(event)">Restart</button>
                 <button id="left" class="control-panel">
                     ◀
                 </button>
