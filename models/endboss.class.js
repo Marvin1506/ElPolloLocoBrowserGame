@@ -177,9 +177,11 @@ class Endboss extends movableObject {
         }
 
         this.playDeadAnimation(this.IMAGES_DEAD);
-        if (this.currentImage === 2 ) {
-            showGameWonScreen();
-            stopGame();
+            if (this.currentImage === 2 ) {
+                setTimeout(() => {
+                showGameWonScreen();
+                stopGame();
+            }, 700);
         }
     }
 

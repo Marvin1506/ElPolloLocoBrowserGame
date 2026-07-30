@@ -1,6 +1,6 @@
 class Character extends movableObject {
     height = 280;
-    y = 60; // 150
+    y = 65; // 150
     speed = 10;
     world;
     ignoreEnemyCollision;
@@ -141,7 +141,10 @@ class Character extends movableObject {
                 }
                 this.playDeadAnimation(this.IMAGES_DEAD);
                 if(this.currentImage = 6) {
-                    showGameLostScreen();
+                    setTimeout(() => {
+                        showGameLostScreen();
+                    }, 700);
+                    
                 }
             } else if (this.isHurt()){
                 this.playAnimation(this.IMAGES_HURT);
