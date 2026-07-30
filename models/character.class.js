@@ -140,10 +140,10 @@ class Character extends movableObject {
                     this.deadAnimationStarted = true;
                 }
                 this.playDeadAnimation(this.IMAGES_DEAD);
-                if(this.currentImage = 6) {
+                if(this.currentImage === 6) {
                     setTimeout(() => {
                         showGameLostScreen();
-                    }, 700);
+                    }, 500);
                     
                 }
             } else if (this.isHurt()){
