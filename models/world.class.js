@@ -47,11 +47,8 @@ class World {
 
     run() {
         setInterval(() => {
-            this.checkPepeJumpCollision();
-        }, 1000 / 120);
-        setInterval(() => {
             this.checkCollisions();
-        }, 200);
+        }, 1000 / 60);
          setInterval(() => {
             this.checkThrowObjects();
         }, 100);
@@ -127,16 +124,46 @@ class World {
     }
 
     checkCollisions() {
-        if (this.character.ignoreEnemyCollision) {
-            return;
-        }
-        this.level.enemies.forEach( (enemy) => {
-            if(!enemy.isDeadChicken && !enemy.isDeadChickenSmall && this.character.isColliding(enemy)) {
-                this.character.hit();
-                this.statusBar.setPercentage(this.character.energy);
-                //console.log("Collision with character", this.character.energy);
+        this.level.enemies.forEach((enemy) => {
+            if (this.isEnemyDead(enemy)) {
+                return;
+            }
+            if (this.character.isJumpingOn(enemy)) {
+                this.handleEnemyJumpCollision(enemy);
+            } else if (
+                !this.character.ignoreEnemyCollision &&
+                this.character.isColliding(enemy)
+            ) {
+                this.handleCharacterCollision();
             }
         });
+    }
+
+    isEnemyDead(enemy) {
+        if (enemy instanceof Chicken) {
+            return enemy.isDeadChicken;
+        }
+
+        if (enemy instanceof ChickenSmall) {
+            return enemy.isDeadChickenSmall;
+        }
+
+        return false;
+    }
+
+    handleEnemyJumpCollision(enemy) {
+        if (enemy instanceof Chicken) {
+            enemy.die();
+            this.handleJumpOnEnemy();
+        } else if (enemy instanceof ChickenSmall) {
+            enemy.dieChickenSmall();
+            this.handleJumpOnEnemy();
+        }
+    }
+
+    handleCharacterCollision() {
+        this.character.hit();
+        this.statusBar.setPercentage(this.character.energy);
     }
 
     checkPepeJumpCollision() {
@@ -215,7 +242,7 @@ class World {
         }
 
         mo.draw(this.ctx); // draw the image of the object on the canvas at the specified position and size (uses gpu)
-        //mo.drawFrame(this.ctx); // draw the frame of the object on the canvas for collision detection
+        mo.drawFrame(this.ctx); // draw the frame of the object on the canvas for collision detection
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);
