@@ -41,7 +41,7 @@ canvas {
     justify-content: center;
     align-items: center;
     gap: 32px;
-    z-index: 100;
+    z-index: 4;
 }
 
 .start-screen-image {
