@@ -16,7 +16,7 @@ class Bottle extends DrawableObject {
     height = 80;
     x = 150;
     y = 350;
-    static lastX = 200;
+    static lastX = 70;
 
     constructor() {
         super();

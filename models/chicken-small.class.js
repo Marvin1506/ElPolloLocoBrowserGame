@@ -3,6 +3,7 @@ class ChickenSmall extends movableObject{
     height = 40;
     width = 50;
     isDeadChickenSmall = false;
+    static lastX = 70;
 
     IMAGES_WALKING = [
         "img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
@@ -15,10 +16,10 @@ class ChickenSmall extends movableObject{
     ];
 
      offset = {
-        top: 0, //120 offset für pepe
-        bottom: 0, //30
-        left: 0, //40
-        right: 0 //30
+        top: 3,
+        bottom: 3,
+        left: 3,
+        right: 3,
     } 
 
     constructor() {
