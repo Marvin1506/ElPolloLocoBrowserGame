@@ -1,9 +1,9 @@
 let level1;
 
 function initLevel() {
-    Bottle.lastX = 200;
-    Chicken.lastX = 200;
-    ChickenSmall.lastX = 200;
+    Bottle.lastX = 70;
+    Chicken.lastX = 100;
+    ChickenSmall.lastX = 70;
     level1 = new Level([
         new Chicken(),
         new Chicken(),
