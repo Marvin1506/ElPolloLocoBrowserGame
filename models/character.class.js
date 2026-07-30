@@ -10,7 +10,7 @@ class Character extends movableObject {
     offset = {
         top: 120, //120 offset für pepe
         bottom: 30, //30
-        left: 40, //40
+        left: 35, //40
         right: 30 //30
     } 
     IMAGES_WALKING = [
