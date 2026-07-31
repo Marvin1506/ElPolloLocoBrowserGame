@@ -4,6 +4,7 @@ function initLevel() {
     Bottle.lastX = 70;
     Chicken.lastX = 100;
     ChickenSmall.lastX = 70;
+    Coin.lastX = 140;
     level1 = new Level([
         new Chicken(),
         new Chicken(),
