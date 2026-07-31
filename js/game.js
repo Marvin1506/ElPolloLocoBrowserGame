@@ -104,42 +104,42 @@ window.addEventListener("keyup", (event) => {
     }
 });
 
-leftBtn.addEventListener("touchstart", () => {
+leftBtn.addEventListener("touchstart", (event) => {
     event.preventDefault();
     keyboard.LEFT = true;
 });
 
-leftBtn.addEventListener("touchend", () => {
+leftBtn.addEventListener("touchend", (event) => {
     event.preventDefault();
     keyboard.LEFT = false;
 });
 
-rightBtn.addEventListener("touchstart", () => {
+rightBtn.addEventListener("touchstart", (event) => {
     event.preventDefault();
     keyboard.RIGHT = true;
 });
 
-rightBtn.addEventListener("touchend", () => {
+rightBtn.addEventListener("touchend", (event) => {
     event.preventDefault();
     keyboard.RIGHT = false;
 });
 
-jumpBtn.addEventListener("touchstart", () => {
+jumpBtn.addEventListener("touchstart", (event) => {
     event.preventDefault();
     keyboard.SPACE = true;
 });
 
-jumpBtn.addEventListener("touchend", () => {
+jumpBtn.addEventListener("touchend", (event) => {
     event.preventDefault();
     keyboard.SPACE = false;
 });
 
-throwBtn.addEventListener("touchstart", () => {
+throwBtn.addEventListener("touchstart", (event) => {
     event.preventDefault();
     keyboard.D = true;
 });
 
-throwBtn.addEventListener("touchend", () => {
+throwBtn.addEventListener("touchend", (event) => {
     event.preventDefault();
     keyboard.D = false;
 });
