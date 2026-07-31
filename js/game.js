@@ -10,9 +10,11 @@ const backgroundMusic = new Audio("./audio/mfcc-mexican-mexican-mexico-mariachi-
 const pepeGetsDamageSound = new Audio("./audio/Pepe_gets_dmg.oga");
 const pepeDeathSound = new Audio("./audio/Pepe_death.mp3");
 const pepeJumpSound = new Audio("./audio/Pepe_Jump.wav");
+const bottleBreak = new Audio("./audio/bottle_hit.wav");
 pepeGetsDamageSound.volume = 0.03;
 pepeDeathSound.volume = 0.03;
 pepeJumpSound.volume = 0.1;
+bottleBreak.volume = 0.1;
 backgroundMusic.volume = 0.005;
 backgroundMusic.loop = true;
 

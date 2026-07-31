@@ -64,5 +64,6 @@ class ThrowableObject extends movableObject {
         this.hasHit = true;
         this.speedY = 0;
         this.currentImage = 0;
+        bottleBreak.play();
     }
 }
