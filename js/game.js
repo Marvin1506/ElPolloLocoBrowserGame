@@ -6,9 +6,21 @@ const leftBtn = document.getElementById("left");
 const rightBtn = document.getElementById("right");
 const jumpBtn = document.getElementById("jump");
 const throwBtn = document.getElementById("throw");
+const backgroundMusic = new Audio("./audio/mfcc-mexican-mexican-mexico-mariachi-music-290633.mp3");
+const pepeGetsDamageSound = new Audio("./audio/Pepe_gets_dmg.oga");
+const pepeDeathSound = new Audio("./audio/Pepe_death.mp3");
+const pepeJumpSound = new Audio("./audio/Pepe_Jump.wav");
+pepeGetsDamageSound.volume = 0.03;
+pepeDeathSound.volume = 0.03;
+pepeJumpSound.volume = 0.1;
+backgroundMusic.volume = 0.005;
+backgroundMusic.loop = true;
 
 function init() {
     canvas = document.getElementById("canvas");
+    document.addEventListener("click",() => {
+        backgroundMusic.play();
+    }, { once: true });
 }
 
 function initGame() {

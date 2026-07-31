@@ -128,6 +128,7 @@ class Character extends movableObject {
             }
             if(this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
+                pepeJumpSound.play();
             }
 
             this.world.camera_x = -this.x + 100;
@@ -138,6 +139,7 @@ class Character extends movableObject {
                 if (!this.deadAnimationStarted) {
                     this.currentImage = 0;
                     this.deadAnimationStarted = true;
+                    pepeDeathSound.play();
                 }
                 this.playDeadAnimation(this.IMAGES_DEAD);
                 if(this.currentImage === 6) {
@@ -148,6 +150,7 @@ class Character extends movableObject {
                 }
             } else if (this.isHurt()){
                 this.playAnimation(this.IMAGES_HURT);
+                pepeGetsDamageSound.play();
             }
              else if(this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
