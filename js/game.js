@@ -83,7 +83,7 @@ function playSound(soundPath, volume) {
 }
 
 function playChickenSound() {
-    if (chickenSoundIsPlaying) {
+    if (gameState !== "playing" || chickenSoundIsPlaying) {
         return;
     }
 
@@ -100,7 +100,7 @@ function playChickenSound() {
 }
 
 function playSmallChickenSound() {
-    if (smallChickenSoundIsPlaying) {
+    if (gameState !== "playing" || smallChickenSoundIsPlaying) {
         return;
     }
 
