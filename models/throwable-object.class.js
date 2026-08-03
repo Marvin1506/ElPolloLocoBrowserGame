@@ -64,8 +64,6 @@ class ThrowableObject extends movableObject {
         this.hasHit = true;
         this.speedY = 0;
         this.currentImage = 0;
-        const bottleBreak = new Audio("./audio/bottle_hit.wav");
-        bottleBreak.volume = 0.1;
-        bottleBreak.play();
+        playSound("./audio/bottle_hit.wav", 0.1);
     }
 }

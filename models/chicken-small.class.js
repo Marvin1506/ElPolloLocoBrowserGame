@@ -52,9 +52,7 @@ class ChickenSmall extends movableObject{
         this.isDeadChickenSmall = true;
         this.currentImage = 0;
         this.speed = 0;
-        const chickenDeathSound = new Audio("./audio/chicken_dies.wav");
-        chickenDeathSound.volume = 0.1;
-        chickenDeathSound.play();
+        playSound("./audio/chicken_dies.wav", 0.1);
     }
 
     startRandomChickenSounds() {

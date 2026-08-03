@@ -4,17 +4,13 @@ let keyboard = new Keyboard();
 let gameState = "start";
 let chickenSoundIsPlaying = false;
 let smallChickenSoundIsPlaying = false;
+let soundMuted = false;
 const leftBtn = document.getElementById("left");
 const rightBtn = document.getElementById("right");
 const jumpBtn = document.getElementById("jump");
 const throwBtn = document.getElementById("throw");
+const activeSounds = [];
 const backgroundMusic = new Audio("./audio/mfcc-mexican-mexican-mexico-mariachi-music-290633.mp3");
-const pepeGetsDamageSound = new Audio("./audio/Pepe_gets_dmg.oga");
-const pepeDeathSound = new Audio("./audio/Pepe_death.mp3");
-const pepeJumpSound = new Audio("./audio/Pepe_Jump.wav");
-pepeGetsDamageSound.volume = 0.03;
-pepeDeathSound.volume = 0.03;
-pepeJumpSound.volume = 0.1;
 backgroundMusic.volume = 0.005;
 backgroundMusic.loop = true;
 
@@ -76,14 +72,44 @@ function stopAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
 
+function toggleSound() {
+    soundMuted = !soundMuted;
+
+    backgroundMusic.muted = soundMuted;
+
+    activeSounds.forEach(sound => {
+        sound.muted = soundMuted;
+    });
+
+    updateSoundIcon();
+}
+
 function playSound(soundPath, volume) {
+    if (soundMuted) {
+        return;
+    }
     const sound = new Audio(soundPath);
     sound.volume = volume;
-    sound.play();
+    activeSounds.push(sound);
+
+    sound.play().catch(error => {
+        console.warn("Sound konnte nicht abgespielt werden:", error);
+    });
+    sound.addEventListener("ended", () => {
+        removeActiveSound(sound);
+    });
+}
+
+function removeActiveSound(sound) {
+    const soundIndex = activeSounds.indexOf(sound);
+
+    if (soundIndex !== -1) {
+        activeSounds.splice(soundIndex, 1);
+    }
 }
 
 function playChickenSound() {
-    if (gameState !== "playing" || chickenSoundIsPlaying) {
+    if (soundMuted || gameState !== "playing" || chickenSoundIsPlaying) {
         return;
     }
 
@@ -92,15 +118,17 @@ function playChickenSound() {
     const sound = new Audio("./audio/chicken_sound.mp3");
     sound.volume = 0.04;
 
+    activeSounds.push(sound);
     sound.play();
 
     sound.addEventListener("ended", () => {
         chickenSoundIsPlaying = false;
+        removeActiveSound(sound);
     });
 }
 
 function playSmallChickenSound() {
-    if (gameState !== "playing" || smallChickenSoundIsPlaying) {
+    if (soundMuted || gameState !== "playing" || smallChickenSoundIsPlaying) {
         return;
     }
 
@@ -108,11 +136,22 @@ function playSmallChickenSound() {
 
     const sound = new Audio("./audio/baby_chicken_sound.mp3");
     sound.volume = 0.1;
+
+    activeSounds.push(sound);
     sound.play();
 
     sound.addEventListener("ended", () => {
         smallChickenSoundIsPlaying = false;
+        removeActiveSound(sound);
     });
+}
+
+function updateSoundIcon() {
+    const soundIcon = document.getElementById("sound-icon");
+
+    soundIcon.src = soundMuted
+        ? "./img/11_buttons/muted.svg"
+        : "./img/11_buttons/sound_on.svg";
 }
 
 window.addEventListener("keydown", (event) => { // event listener that listens for keydown events and sets the corresponding property of the keyboard object to true when the key is pressed

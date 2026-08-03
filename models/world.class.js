@@ -106,9 +106,7 @@ class World {
 
                 this.statusBarBottles.setPercentage(newPercentage);
                 this.level.bottles.splice(index, 1);
-                const bottlePickupSound = new Audio("./audio/bottle_collected.mp3");
-                bottlePickupSound.volume = 0.2;
-                bottlePickupSound.play();
+                playSound("./audio/bottle_collected.mp3", 0.2);
             }
         });
     }
@@ -120,9 +118,7 @@ class World {
                     this.statusBarCoins.percentage + 20,
                     100
                 );
-                const coinPickupSound = new Audio("./audio/coin_collected.wav");
-                coinPickupSound.volume = 0.05;
-                coinPickupSound.play();
+                playSound("./audio/coin_collected.wav", 0.05);
                 this.statusBarCoins.setPercentage(newPercentage);
                 this.level.coins.splice(index, 1);
             }

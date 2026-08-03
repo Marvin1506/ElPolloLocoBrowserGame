@@ -128,7 +128,7 @@ class Character extends movableObject {
             }
             if(this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
-                pepeJumpSound.play();
+                playSound("./audio/Pepe_Jump.wav", 0.1);
             }
 
             this.world.camera_x = -this.x + 100;
@@ -139,7 +139,7 @@ class Character extends movableObject {
                 if (!this.deadAnimationStarted) {
                     this.currentImage = 0;
                     this.deadAnimationStarted = true;
-                    pepeDeathSound.play();
+                    playSound("./audio/Pepe_death.mp3", 0.03);
                 }
                 this.playDeadAnimation(this.IMAGES_DEAD);
                 if(this.currentImage === 6) {
@@ -150,7 +150,7 @@ class Character extends movableObject {
                 }
             } else if (this.isHurt()){
                 this.playAnimation(this.IMAGES_HURT);
-                pepeGetsDamageSound.play();
+                playSound("./audio/Pepe_gets_dmg.oga", 0.03);
             }
              else if(this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);

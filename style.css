@@ -167,6 +167,16 @@ canvas {
         width: 100%;
     }
 
+    .mobile-button-flexbox-top {
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        top: 50px;
+        display: flex;
+        justify-content: flex-end;
+        z-index: 10;
+    }
+
     .mobile-button-flexbox {
         position: absolute;
         left: 20px;

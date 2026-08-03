@@ -1,5 +1,4 @@
 let gameStarted = false;
-let soundMuted = false;
 
 function fullscreen() {
     let element = document.getElementById("game-content-fullscreen");
@@ -41,10 +40,4 @@ function showControls() {
 function hideControls() {
     document.getElementById("controls-screen").classList.add("display-none");
     document.querySelector(".start-menu").classList.remove("display-none");
-}
-
-function toggleSound() {
-    soundMuted = !soundMuted;
-
-    console.log("Sound muted:", soundMuted);
 }
