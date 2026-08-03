@@ -85,12 +85,10 @@ class Endboss extends movableObject {
                 this.handleDeadAnimation();
                 return;
             }
-
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
                 return;
             }
-
             this.handleBossImages();
         }, 100);
     }

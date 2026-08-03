@@ -2,6 +2,8 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let gameState = "start";
+let chickenSoundIsPlaying = false;
+let smallChickenSoundIsPlaying = false;
 const leftBtn = document.getElementById("left");
 const rightBtn = document.getElementById("right");
 const jumpBtn = document.getElementById("jump");
@@ -10,11 +12,9 @@ const backgroundMusic = new Audio("./audio/mfcc-mexican-mexican-mexico-mariachi-
 const pepeGetsDamageSound = new Audio("./audio/Pepe_gets_dmg.oga");
 const pepeDeathSound = new Audio("./audio/Pepe_death.mp3");
 const pepeJumpSound = new Audio("./audio/Pepe_Jump.wav");
-const bottleBreak = new Audio("./audio/bottle_hit.wav");
 pepeGetsDamageSound.volume = 0.03;
 pepeDeathSound.volume = 0.03;
 pepeJumpSound.volume = 0.1;
-bottleBreak.volume = 0.1;
 backgroundMusic.volume = 0.005;
 backgroundMusic.loop = true;
 
@@ -74,6 +74,45 @@ function clearCanvas() {
 
 function stopAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
+}
+
+function playSound(soundPath, volume) {
+    const sound = new Audio(soundPath);
+    sound.volume = volume;
+    sound.play();
+}
+
+function playChickenSound() {
+    if (chickenSoundIsPlaying) {
+        return;
+    }
+
+    chickenSoundIsPlaying = true;
+
+    const sound = new Audio("./audio/chicken_sound.mp3");
+    sound.volume = 0.04;
+
+    sound.play();
+
+    sound.addEventListener("ended", () => {
+        chickenSoundIsPlaying = false;
+    });
+}
+
+function playSmallChickenSound() {
+    if (smallChickenSoundIsPlaying) {
+        return;
+    }
+
+    smallChickenSoundIsPlaying = true;
+
+    const sound = new Audio("./audio/baby_chicken_sound.mp3");
+    sound.volume = 0.1;
+    sound.play();
+
+    sound.addEventListener("ended", () => {
+        smallChickenSoundIsPlaying = false;
+    });
 }
 
 window.addEventListener("keydown", (event) => { // event listener that listens for keydown events and sets the corresponding property of the keyboard object to true when the key is pressed
@@ -170,6 +209,7 @@ function showGameWonScreen() {
     restartButton.classList.remove("display-none");
     canvas.classList.add("opacity");
     mobileFlexBox.classList.add("display-none");
+    playSound("./audio/win_sound.mp3", 0.1);
 }
 
 function hideGameWonScreen() {

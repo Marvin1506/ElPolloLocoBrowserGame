@@ -75,6 +75,7 @@ class World {
                     bottle.splash();
                 } else if (enemy instanceof Endboss && !enemy.isDeadChickenSmall && !bottle.hasHit && bottle.isColliding(enemy)) {
                     enemy.hit();
+                    playSound("./audio/boss_hurt.mp3", 0.05);
                     this.statusBarBoss.setPercentage(enemy.energy);
                     bottle.splash();
                 }
@@ -105,6 +106,9 @@ class World {
 
                 this.statusBarBottles.setPercentage(newPercentage);
                 this.level.bottles.splice(index, 1);
+                const bottlePickupSound = new Audio("./audio/bottle_collected.mp3");
+                bottlePickupSound.volume = 0.2;
+                bottlePickupSound.play();
             }
         });
     }
@@ -116,7 +120,9 @@ class World {
                     this.statusBarCoins.percentage + 20,
                     100
                 );
-
+                const coinPickupSound = new Audio("./audio/coin_collected.wav");
+                coinPickupSound.volume = 0.05;
+                coinPickupSound.play();
                 this.statusBarCoins.setPercentage(newPercentage);
                 this.level.coins.splice(index, 1);
             }

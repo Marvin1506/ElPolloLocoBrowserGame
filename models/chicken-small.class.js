@@ -31,6 +31,7 @@ class ChickenSmall extends movableObject{
         ChickenSmall.lastX = this.x;
         this.speed = 0.2 + Math.random() * 0.25;
         this.animate();
+        this.startRandomChickenSounds();
     }
 
     animate() {
@@ -51,5 +52,20 @@ class ChickenSmall extends movableObject{
         this.isDeadChickenSmall = true;
         this.currentImage = 0;
         this.speed = 0;
+        const chickenDeathSound = new Audio("./audio/chicken_dies.wav");
+        chickenDeathSound.volume = 0.1;
+        chickenDeathSound.play();
+    }
+
+    startRandomChickenSounds() {
+        const randomDelay = 2500 + Math.random() * 5000;
+
+        setTimeout(() => {
+            if (!this.isDeadChickenSmall) {
+                playSmallChickenSound();
+            }
+
+            this.startRandomChickenSounds();
+        }, randomDelay);
     }
 }
