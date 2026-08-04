@@ -139,6 +139,7 @@ class Character extends movableObject {
                 if (!this.deadAnimationStarted) {
                     this.currentImage = 0;
                     this.deadAnimationStarted = true;
+                    this.speed = 0;
                     playSound("./audio/Pepe_death.mp3", 0.03);
                 }
                 this.playDeadAnimation(this.IMAGES_DEAD);

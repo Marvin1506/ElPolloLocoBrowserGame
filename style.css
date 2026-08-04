@@ -125,6 +125,11 @@ canvas {
     z-index: 5;
 }
 
+.restart-button:hover {
+    transform: translateX(-50%) scale(1.08);
+    background-color: rgb(221, 104, 26);
+}
+
 .won-screen {
     width: 720px;
     max-width: 90vw;
