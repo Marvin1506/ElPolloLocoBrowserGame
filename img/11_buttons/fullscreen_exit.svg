@@ -1,0 +1,19 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="40"
+    height="40"
+    viewBox="0 0 64 64"
+    fill="none"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+>
+    <g stroke="white">
+        <path d="M10 24V10h14"/>
+        <path d="M54 24V10H40"/>
+        <path d="M10 40v14h14"/>
+        <path d="M54 40v14H40"/>
+    </g>
+
+    <path d="M12 12L52 52" stroke="#e53935"/>
+</svg>

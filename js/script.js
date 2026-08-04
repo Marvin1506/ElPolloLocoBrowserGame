@@ -1,5 +1,9 @@
 let gameStarted = false;
 
+document.addEventListener("fullscreenchange", () => {
+    updateFullscreenIcon();
+});
+
 function fullscreen() {
     let element = document.getElementById("game-content-fullscreen");
     enterFullscreen(element);
@@ -12,6 +16,15 @@ function enterFullscreen(element) {
         element.msRequestFullscreen();
     } else if (element.webkitRequestFullscreen) {
         element.webkitRequestFullscreen();
+    }
+}
+
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        const element = document.getElementById("game-content-fullscreen");
+        enterFullscreen(element);
+    } else {
+        exitFullscreen();
     }
 }
 
@@ -40,4 +53,14 @@ function showControls() {
 function hideControls() {
     document.getElementById("controls-screen").classList.add("display-none");
     document.querySelector(".start-menu").classList.remove("display-none");
+}
+
+function updateFullscreenIcon() {
+    const fullscreenIcon = document.getElementById("fullscreen-icon");
+
+    if (document.fullscreenElement) {
+        fullscreenIcon.src = "./img/11_buttons/fullscreen_exit.svg";
+    } else {
+        fullscreenIcon.src = "./img/11_buttons/fullscreen.svg";
+    }
 }
