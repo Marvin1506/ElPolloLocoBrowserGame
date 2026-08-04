@@ -275,7 +275,7 @@ canvas {
     }
 }
 
-@media only screen and (max-width: 932px) {
+@media (hover: none) and (pointer: coarse) {
 
     .control-panel {
         display: flex;
@@ -401,7 +401,7 @@ canvas {
     }
 }
 
-@media only screen and (max-width: 720px) and (orientation: portrait) {
+@media (hover: none) and (pointer: coarse) and (orientation: portrait) {
     .rotate-screen {
         position: fixed;
         inset: 0;
@@ -427,7 +427,7 @@ canvas {
     }
 }
 
-@media only screen and (max-width: 932px) and (orientation: landscape) {
+@media (hover: none) and (pointer: coarse) and (orientation: landscape) {
     .game-content {
         width: min(100vw, 100%);
         height: min(100vh, 100%);
