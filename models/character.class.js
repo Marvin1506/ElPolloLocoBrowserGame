@@ -6,6 +6,8 @@ class Character extends movableObject {
     ignoreEnemyCollision;
     lastDamageTime = 0;
     damageCooldown = 700;
+    snoringSound = null;
+    isSnoring = false;
 
     offset = {
         top: 120, //120 offset für pepe
@@ -111,6 +113,32 @@ class Character extends movableObject {
         return true;
     }
 
+    startSnoring() {
+        if (this.isSnoring || soundMuted) {
+            return;
+        }
+
+        this.isSnoring = true;
+        this.snoringSound = new Audio("./audio/pepe_snoring.wav");
+        this.snoringSound.volume = 0.03;
+        this.snoringSound.loop = true;
+        this.snoringSound.play();
+
+        activeSounds.push(this.snoringSound);
+    }
+
+    stopSnoring() {
+        if (!this.snoringSound) {
+            return;
+        }
+
+        this.snoringSound.pause();
+        removeActiveSound(this.snoringSound);
+
+        this.snoringSound = null;
+        this.isSnoring = false;
+    }
+
     animate() {
         // how quick the character moves and takes the keyboard input
         // walking sound pause and walking sound play in left and right movement later
@@ -143,6 +171,7 @@ class Character extends movableObject {
                     playSound("./audio/Pepe_death.mp3", 0.03);
                 }
                 this.playDeadAnimation(this.IMAGES_DEAD);
+                this.stopSnoring();
                 if(this.currentImage === 6) {
                     setTimeout(() => {
                         showGameLostScreen();
@@ -152,15 +181,19 @@ class Character extends movableObject {
             } else if (this.isHurt()){
                 this.playAnimation(this.IMAGES_HURT);
                 playSound("./audio/Pepe_gets_dmg.oga", 0.03);
+                this.stopSnoring();
             }
              else if(this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
+                this.stopSnoring();
             }
             else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT){
                     //walk animation how often the image changes
                 this.playAnimation(this.IMAGES_WALKING);
+                this.stopSnoring();
             } else if (this.isLongAfk()) {
                 this.playAnimation(this.IMAGES_AFK);
+                this.startSnoring();
             } else if (this.isIdle()) {
                 this.playAnimation(this.IMAGES_IDLE);
             } 
