@@ -11,6 +11,7 @@ const jumpBtn = document.getElementById("jump");
 const throwBtn = document.getElementById("throw");
 const activeSounds = [];
 const backgroundMusic = new Audio("./audio/mfcc-mexican-mexican-mexico-mariachi-music-290633.mp3");
+const muteButton = document.getElementById("mute-button");
 backgroundMusic.volume = 0.005;
 backgroundMusic.loop = true;
 
@@ -41,6 +42,7 @@ function startNewGame() {
     world = new World(canvas, keyboard);
     gameStarted = true;
     gameState = "playing";
+    muteButton.classList.remove("display-none");
 }
 
 function stopGame() {
@@ -249,6 +251,7 @@ function showGameWonScreen() {
     canvas.classList.add("opacity");
     mobileFlexBox.classList.add("display-none");
     playSound("./audio/win_sound.mp3", 0.1);
+    muteButton.classList.add("display-none");
 }
 
 function hideGameWonScreen() {
@@ -276,6 +279,7 @@ function showGameLostScreen() {
     restartButton.classList.remove("display-none");
     canvas.classList.add("opacity");
     mobileFlexBox.classList.add("display-none");
+    muteButton.classList.add("display-none");
 }
 
 function hideGameLostScreen() {

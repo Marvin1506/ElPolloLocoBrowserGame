@@ -108,10 +108,6 @@ canvas {
     text-align: center;
 }
 
-.display-none {
-    display: none;
-}
-
 .restart-button {
     padding: 10px 28px;
     font-family: "zabras", Arial, sans-serif;
@@ -290,4 +286,8 @@ canvas {
     canvas {
         height: 100vh;
     }
+}
+
+.display-none {
+    display: none;
 }
