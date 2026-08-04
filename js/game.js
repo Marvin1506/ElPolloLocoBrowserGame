@@ -255,6 +255,7 @@ function showGameWonScreen() {
     playSound("./audio/win_sound.mp3", 0.1);
     muteButton.classList.add("display-none");
     fullscreenButton.classList.add("display-none");
+    closeFullscreenAfterGame();
 }
 
 function hideGameWonScreen() {
@@ -284,6 +285,7 @@ function showGameLostScreen() {
     mobileFlexBox.classList.add("display-none");
     muteButton.classList.add("display-none");
     fullscreenButton.classList.add("display-none");
+    closeFullscreenAfterGame();
 }
 
 function hideGameLostScreen() {
@@ -297,4 +299,10 @@ function hideGameLostScreen() {
     restartButton.classList.add("display-none");
     canvas.classList.remove("opacity");
     mobileFlexBox.classList.remove("display-none");
+}
+
+function closeFullscreenAfterGame() {
+    if (document.fullscreenElement) {
+        exitFullscreen();
+    }
 }
