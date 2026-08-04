@@ -231,7 +231,7 @@ class World {
         }
 
         mo.draw(this.ctx); // draw the image of the object on the canvas at the specified position and size (uses gpu)
-        mo.drawFrame(this.ctx); // draw the frame of the object on the canvas for collision detection
+        //mo.drawFrame(this.ctx); // draw the frame of the object on the canvas for collision detection
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);

@@ -33,7 +33,7 @@ class DrawableObject {
         });
     }
 
-    drawFrame(ctx) {
+    /*drawFrame(ctx) {
         if(this instanceof Character || this instanceof ChickenSmall || this instanceof Chicken){
             ctx.beginPath();
             ctx.lineWidth = "2";
@@ -52,5 +52,5 @@ class DrawableObject {
             );
             ctx.stroke();
         }
-    }
+    }*/
 }
