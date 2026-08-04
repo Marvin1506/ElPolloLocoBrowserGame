@@ -168,13 +168,17 @@ canvas {
     height: 100%;
 }
 
+.rotate-screen {
+    display: none;
+}
+
 @font-face {
     font-family: 'zabras';
     src:url('img/10_font/zabars.ttf') format('woff'), /* Modern Browsers */
     url('img/10_font/zabars.ttf')  format('truetype'), /* Safari, Android, iOS */
 }
 
-@media only screen and (min-width: 720px) {
+@media only screen and (min-width: 933px) {
     .mobile-button-flexbox {
         display: none;
     }
@@ -271,45 +275,7 @@ canvas {
     }
 }
 
-@media only screen and (max-width: 720px) {
-    .game-content {
-        position: relative;
-        width: 720px;
-    }
-
-    canvas {
-        width: 100%;
-    }
-
-    .mobile-button-flexbox-top {
-        position: absolute;
-        left: 20px;
-        right: 20px;
-        top: 50px;
-        display: flex;
-        justify-content: flex-end;
-        z-index: 10;
-    }
-
-    .mobile-button-flexbox {
-        position: absolute;
-        left: 20px;
-        right: 20px;
-        bottom: 10px;
-        display: flex;
-        justify-content: space-between;
-        z-index: 10;
-    }
-
-    .mobile-button-div-move-left-right {
-        display: flex;
-        gap: 16px;
-    }
-
-    .mobile-button-div-jump-throw {
-        display: flex;
-        gap: 16px;
-    }
+@media only screen and (max-width: 932px) {
 
     .control-panel {
         display: flex;
@@ -341,53 +307,138 @@ canvas {
         transition: transform .1s, box-shadow .1s;
     }
 
-    .control-panel-fullscreen {
-        display: none;
-        justify-content: center;
-        align-items: center;
-        pointer-events: all;
-        line-height: 1;
-        padding: 0;
-        width: 52px;
-        height: 52px;
-
-        border: none;
-        border-radius: 50%;
-
-        background: rgba(255, 170, 0, 0.85);
-        color: white;
-
-        font-size: 32px;
-        font-weight: bold;
-
-        cursor: pointer;
-        user-select: none;
-
-        box-shadow:
-            0 8px 16px rgba(0,0,0,.35),
-            inset 0 2px 3px rgba(255,255,255,.4),
-            inset 0 -4px 8px rgba(0,0,0,.25);
-
-        transition: transform .1s, box-shadow .1s;
+    .mobile-button-div-move-left-right {
+        display: flex;
+        gap: 10px;
+        align-items: flex-end;
     }
 
-    .control-btn:active {
-        transform: scale(.92);
+    .mobile-button-div-jump-throw {
+        display: flex;
+        gap: 10px;
+        align-items: flex-end;
+    }
 
-        box-shadow:
-            0 2px 6px rgba(0,0,0,.4),
-            inset 0 4px 8px rgba(0,0,0,.35);
+    body {
+        margin: 0;
+        min-height: 100vh;
+        overflow: hidden;
+    }
+
+    h1 {
+        display: none;
+    }
+
+    .game-content {
+        position: relative;
+
+        width: 100vw;
+        height: auto;
+        aspect-ratio: 3 / 2;
+
+        max-height: 100vh;
+
+        overflow: hidden;
+    }
+
+    .canvas-wrapper {
+        position: relative;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    canvas {
+        display: block;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    .mobile-button-flexbox-top {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        left: auto;
+
+        display: flex;
+        gap: 10px;
+
+        z-index: 20;
+    }
+
+    .mobile-button-flexbox {
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+
+        display: flex;
+        justify-content: space-between;
+
+        z-index: 20;
+    }
+
+    .control-panel-fullscreen {
+        display: none;
+    }
+
+    .control-panel {
+        width: 46px;
+        height: 46px;
+        font-size: 26px;
+
+        touch-action: none;
     }
 
     .throw-bottle-icon-mobile {
-        width: 65px;
-        height: 65px;
+        width: 52px;
+        height: 52px;
+    }
+
+    .rotate-screen {
+        display: none;
     }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 720px) and (orientation: portrait) {
+    .rotate-screen {
+        position: fixed;
+        inset: 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 24px;
+
+        color: white;
+        background:
+            rgba(0, 0, 0, 0.9);
+
+        text-align: center;
+        z-index: 9999;
+    }
+
+    .game-content,
+    .start-screen,
+    .end-screen {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 932px) and (orientation: landscape) {
+    .game-content {
+        width: min(100vw, 100%);
+        height: min(100vh, 100%);
+
+        margin: auto;
+    }
+
+    .canvas-wrapper,
     canvas {
-        height: 100vh;
+        width: 100%;
+        height: 100%;
     }
 }
 
