@@ -18,6 +18,8 @@ backgroundMusic.loop = true;
 
 function init() {
     canvas = document.getElementById("canvas");
+    const mobileFlexBox = document.getElementById("mobile-button-flexbox");
+    mobileFlexBox.classList.add("display-none");
     document.addEventListener("click",() => {
         backgroundMusic.play();
     }, { once: true });
@@ -45,6 +47,7 @@ function startNewGame() {
     gameState = "playing";
     muteButton.classList.remove("display-none");
     fullscreenButton.classList.remove("display-none");
+    document.getElementById("mobile-button-flexbox").classList.remove("display-none");
 }
 
 function stopGame() {
@@ -152,10 +155,17 @@ function playSmallChickenSound() {
 
 function updateSoundIcon() {
     const soundIcon = document.getElementById("sound-icon");
+    const soundButton = document.getElementById("mute-button-start");
 
-    soundIcon.src = soundMuted
-        ? "./img/11_buttons/muted.svg"
-        : "./img/11_buttons/sound_on.svg";
+    soundIcon.src = soundMuted ? "./img/11_buttons/muted.svg" : "./img/11_buttons/sound_on.svg";
+    
+    if (soundButton) {
+        if (soundMuted) {
+            soundButton.style.background = "rgba(220, 53, 69, 0.95)";
+        } else {
+            soundButton.style.background = "rgba(255, 170, 0, 0.85)";
+        }
+    }
 }
 
 window.addEventListener("keydown", (event) => { // event listener that listens for keydown events and sets the corresponding property of the keyboard object to true when the key is pressed

@@ -177,6 +177,10 @@ canvas {
     display: none;
 }
 
+.sound-muted {
+    background-color: #d62828;
+}
+
 @font-face {
     font-family: 'zabras';
     src:url('img/10_font/zabars.ttf') format('woff'), /* Modern Browsers */
@@ -422,7 +426,7 @@ canvas {
             rgba(0, 0, 0, 0.9);
 
         text-align: center;
-        z-index: 9999;
+        z-index: 10;
     }
 
     .game-content,
@@ -449,4 +453,26 @@ canvas {
 
 .display-none {
     display: none;
+}
+
+@media screen and (max-height: 376px) {
+    .start-menu {
+        margin-top: 315px;
+    }
+
+    .start-menu-button {
+        padding: 
+        3px 20px;
+    }
+}
+
+@media screen and (max-height: 340px) {
+    .start-menu {
+        margin-top: 274px;
+    }
+
+    .start-menu-button {
+        padding: 
+        1px 20px;
+    }
 }
