@@ -213,10 +213,22 @@ class World {
         });
     }
 
-    addObjectsToMap(objects) {  // add all objects in the array to the map with the addToMap function
-        objects.forEach(object => {
-            this.addToMap(object);
-        })
+    addObjectsToMap(objects) { // add all objects in the array to the map with the addToMap function
+        objects.forEach((object) => {
+            if (this.isObjectVisible(object)) {
+                this.addToMap(object);
+            }
+        });
+    }
+
+    isObjectVisible(object) {
+        const screenLeft = -this.camera_x - 200;
+        const screenRight = -this.camera_x + this.canvas.width + 200;
+
+        return (
+            object.x + object.width >= screenLeft &&
+            object.x <= screenRight
+        );
     }
 
     addToMap(mo) {  // add a single object to the map and saves the current state of an object character turns so that it can be restored later with no spaces etc.
