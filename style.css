@@ -448,13 +448,18 @@ canvas {
     .game-content {
         width: 100vw;
         height: 100svh;
-        margin: 0 auto;
+        margin: 0;
     }
 
     .canvas-wrapper,
     canvas {
         width: 100%;
         height: 100%;
+    }
+
+    body {
+        justify-content: flex-start;
+        align-items: center;
     }
 }
 
