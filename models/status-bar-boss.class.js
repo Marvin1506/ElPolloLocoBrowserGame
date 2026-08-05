@@ -1,3 +1,6 @@
+/**
+ * Represents the boss health bar displayed on the screen.
+*/
 class StatusBarBoss extends DrawableObject {
     visible = false;
 
@@ -12,6 +15,9 @@ class StatusBarBoss extends DrawableObject {
 
     percentage = 100;
 
+    /**
+     * Creates the boss health bar and loads its images.
+    */
     constructor () {
         super();
         this.loadImages(this.IMAGES);
@@ -22,14 +28,21 @@ class StatusBarBoss extends DrawableObject {
         this.height = 60;
     }
 
+    /**
+     * Updates the displayed health percentage of the boss.
+     * @param {number} percentage The boss's current health percentage.
+     * @returns {void}
+    */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path]; //loads picture
     }
 
-
-
+    /**
+     * Returns the index of the image that matches the current health percentage.
+     * @returns {number} The image index for the current health state.
+    */
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;
