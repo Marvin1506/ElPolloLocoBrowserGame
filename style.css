@@ -447,7 +447,7 @@ canvas {
 @media (hover: none) and (pointer: coarse) and (orientation: landscape) {
     .game-content {
         width: 100vw;
-        height: 100dvh;
+        height: 100svh;
     }
 
     .canvas-wrapper,
