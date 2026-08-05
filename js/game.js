@@ -80,7 +80,7 @@ function startNewGame() {
 }
 
 /**
- * Stops the current game and resets its main resources.
+ * Stops the current game and resets its resources.
  * The animation frame and intervals are stopped, the keyboard state is
  * reset and the canvas is cleared.
  * @returns {void}
