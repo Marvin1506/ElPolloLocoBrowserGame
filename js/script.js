@@ -2,7 +2,7 @@ let gameStarted = false;
 
 /**
  * Updates the fullscreen icon whenever the fullscreen state changes.
- */
+*/
 document.addEventListener("fullscreenchange", () => {
     updateFullscreenIcon();
 });
@@ -10,7 +10,7 @@ document.addEventListener("fullscreenchange", () => {
 /**
  * Starts fullscreen mode for the game container.
  * @returns {void}
- */
+*/
 function fullscreen() {
     let element = document.getElementById("game-content-fullscreen");
     enterFullscreen(element);
@@ -21,7 +21,7 @@ function fullscreen() {
  * Includes prefixed fallbacks for older browsers.
  * @param {HTMLElement} element - Element that should enter fullscreen mode.
  * @returns {void}
- */
+*/
 function enterFullscreen(element) {
     if (element.requestFullscreen) {
         element.requestFullscreen();
@@ -36,7 +36,7 @@ function enterFullscreen(element) {
  * Toggles fullscreen mode on and off.
  *
  * @returns {void}
- */
+*/
 function toggleFullscreen() {
     if (!document.fullscreenElement) {
         const element = document.getElementById("game-content-fullscreen");
@@ -50,7 +50,7 @@ function toggleFullscreen() {
  * Exits fullscreen mode.
  * Includes prefixed fallbacks for older browsers.
  * @returns {void}
- */
+*/
 function exitFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
@@ -63,7 +63,7 @@ function exitFullscreen() {
  * Starts the game by hiding the start screen and creating the game world.
  * Prevents the game from being initialized more than once.
  * @returns {void}
- */
+*/
 function startGame() {
     document.getElementById("start-screen").classList.add("display-none");
 
@@ -76,7 +76,7 @@ function startGame() {
 /**
  * Displays the controls screen and hides the start menu.
  * @returns {void}
- */
+*/
 function showControls() {
     document.getElementById("controls-screen").classList.remove("display-none");
     document.querySelector(".start-menu").classList.add("display-none");
@@ -85,7 +85,7 @@ function showControls() {
 /**
  * Hides the controls screen and shows the start menu.
  * @returns {void}
- */
+*/
 function hideControls() {
     document.getElementById("controls-screen").classList.add("display-none");
     document.querySelector(".start-menu").classList.remove("display-none");
@@ -94,7 +94,7 @@ function hideControls() {
 /**
  * Updates the fullscreen button icon depending on the current fullscreen state.
  * @returns {void}
- */
+*/
 function updateFullscreenIcon() {
     const fullscreenIcon = document.getElementById("fullscreen-icon");
 
