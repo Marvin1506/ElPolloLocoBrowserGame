@@ -448,6 +448,7 @@ canvas {
     .game-content {
         width: 100vw;
         height: 100svh;
+        margin: 0 auto;
     }
 
     .canvas-wrapper,
