@@ -1,3 +1,10 @@
+/**
+ * Represents a collectible salsa bottle placed in the game world.
+ *
+ * The bottle is assigned a random image and a randomized horizontal
+ * position while maintaining a minimum distance to the previously
+ * created bottle.
+*/
 class Bottle extends DrawableObject {
 
     IMAGES_BOTTLES = [
@@ -16,8 +23,18 @@ class Bottle extends DrawableObject {
     height = 80;
     x = 150;
     y = 350;
+
+    /**
+     * Stores the x-position of the last spawned bottle.
+     * @type {number}
+    */
     static lastX = 70;
 
+    /**
+     * Creates a new collectible bottle with a random image and position.
+     * The bottle is spawned at least 150 pixels after the previous bottle
+     * and is limited to the end of the level.
+    */
     constructor() {
         super();
         const randomImage = this.IMAGES_BOTTLES[Math.floor(Math.random() * this.IMAGES_BOTTLES.length)];
