@@ -1,3 +1,8 @@
+/**
+ * Represents the playable character Pepe.
+ * Handles player movement, animations, damage, idle behavior,
+ * sound effects and camera positioning.
+*/
 class Character extends movableObject {
     height = 280;
     y = 65; // 150
@@ -8,12 +13,13 @@ class Character extends movableObject {
     damageCooldown = 700;
     snoringSound = null;
     isSnoring = false;
+    lostScreenScheduled = false;
 
     offset = {
-        top: 120, //120 offset für pepe
-        bottom: 30, //30
-        left: 35, //40
-        right: 30 //30
+        top: 120,
+        bottom: 30,
+        left: 35,
+        right: 30
     } 
     IMAGES_WALKING = [
         "img/2_character_pepe/2_walk/W-21.png",
@@ -78,6 +84,11 @@ class Character extends movableObject {
         "img/2_character_pepe/1_idle/long_idle/I-20.png",
     ];
 
+    /**
+     * Creates the playable character.
+     * Loads all character images and starts movement,
+     * animation and gravity handling.
+    */
     constructor() {
         super().loadImage("img/2_character_pepe/2_walk/W-21.png");
         this.loadImages(this.IMAGES_WALKING);
@@ -90,18 +101,34 @@ class Character extends movableObject {
         this.applyGravity();
     }
 
+    /**
+     * Checks whether the character is currently idle.
+     * @returns {boolean} True if no input was detected recently.
+    */
     isIdle() {
         return Date.now() - this.lastInput > 10;
     }
 
+     /**
+     * Checks whether the character has been inactive for a longer period.
+     * @returns {boolean} True if no input was detected for at least ten seconds.
+    */
     isLongAfk() {
         return Date.now() - this.lastInput > 10000;
     }
 
+    /**
+     * Checks whether the damage cooldown has expired.
+     * @returns {boolean} True if the character can receive damage.
+    */
     canTakeDamage() {
         return Date.now() - this.lastDamageTime >= this.damageCooldown;
     }
 
+    /**
+     * Applies damage to the character if the cooldown has expired.
+     * @returns {boolean} True if damage was applied, otherwise false.
+    */
     takeDamage() {
         if (!this.canTakeDamage()) {
             return false;
@@ -113,6 +140,12 @@ class Character extends movableObject {
         return true;
     }
 
+    /**
+     * Starts the looping snoring sound.
+     * No new sound is started while Pepe is already snoring
+     * or while the game is muted.
+     * @returns {void}
+    */
     startSnoring() {
         if (this.isSnoring || soundMuted) {
             return;
@@ -127,6 +160,10 @@ class Character extends movableObject {
         activeSounds.push(this.snoringSound);
     }
 
+    /**
+     * Stops the snoring sound and removes it from the active sound list.
+     * @returns {void}
+    */
     stopSnoring() {
         if (!this.snoringSound) {
             return;
@@ -139,65 +176,206 @@ class Character extends movableObject {
         this.isSnoring = false;
     }
 
+    /**
+     * Starts the character movement and animation loops.
+     * @returns {void}
+    */
     animate() {
-        // how quick the character moves and takes the keyboard input
-        // walking sound pause and walking sound play in left and right movement later
-        setInterval( () => {
-            if (this.world.keyboard.RIGHT ||this.world.keyboard.LEFT ||this.world.keyboard.SPACE ||this.world.keyboard.D) {
-                this.lastInput = Date.now();
-            }
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.moveRight();
-                this.otherDirection = false;
-            }
-            if (this.world.keyboard.LEFT && this.x > -620) {
-                this.moveLeft();
-                this.otherDirection = true;
-            }
-            if(this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.jump();
-                playSound("./audio/Pepe_Jump.wav", 0.1);
-            }
+        this.startMovementLoop();
+        this.startCharacterAnimationLoop();
+    }
 
-            this.world.camera_x = -this.x + 100;
-        }, 1000 / 60); // fps
+    /**
+     * Starts the movement loop at approximately 60 updates per second.
+     * @returns {void}
+    */
+    startMovementLoop() {
+        setInterval(() => {
+            this.handleMovement();
+        }, 1000 / 60);
+    }
 
-        setInterval( () => {
-            if (this.isDead()) {
-                if (!this.deadAnimationStarted) {
-                    this.currentImage = 0;
-                    this.deadAnimationStarted = true;
-                    this.speed = 0;
-                    playSound("./audio/Pepe_death.mp3", 0.03);
-                }
-                this.playDeadAnimation(this.IMAGES_DEAD);
-                this.stopSnoring();
-                if(this.currentImage === 6) {
-                    setTimeout(() => {
-                        showGameLostScreen();
-                    }, 500);
-                    
-                }
-            } else if (this.isHurt()){
-                this.playAnimation(this.IMAGES_HURT);
-                playSound("./audio/Pepe_gets_dmg.oga", 0.03);
-                this.stopSnoring();
-            }
-             else if(this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
-                this.stopSnoring();
-            }
-            else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT){
-                    //walk animation how often the image changes
-                this.playAnimation(this.IMAGES_WALKING);
-                this.stopSnoring();
-            } else if (this.isLongAfk()) {
-                this.playAnimation(this.IMAGES_AFK);
-                this.startSnoring();
-            } else if (this.isIdle()) {
-                this.playAnimation(this.IMAGES_IDLE);
-            } 
+    /**
+     * Handles player input, movement, jumping and camera positioning.
+     * @returns {void}
+    */
+    handleMovement() {
+        this.updateLastInput();
+        this.moveCharacter();
+        this.handleJump();
+        this.updateCamera();
+    }
+
+    /**
+     * Updates the timestamp of the most recent player input.
+     * @returns {void}
+    */
+    updateLastInput() {
+        if (this.world.keyboard.RIGHT ||
+            this.world.keyboard.LEFT ||
+            this.world.keyboard.SPACE ||
+            this.world.keyboard.D
+        ) {
+            this.lastInput = Date.now();
+        }
+    }
+
+    /**
+     * Moves the character horizontally based on the keyboard state.
+     * @returns {void}
+    */
+    moveCharacter() {
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+            this.moveRight();
+            this.otherDirection = false;
+        }
+
+        if (this.world.keyboard.LEFT && this.x > -620) {
+            this.moveLeft();
+            this.otherDirection = true;
+        }
+    }
+
+    /**
+     * Makes the character jump when the jump key is pressed
+     * and the character is standing on the ground.
+     * @returns {void}
+    */
+    handleJump() {
+        if (!this.world.keyboard.SPACE || this.isAboveGround()) {
+            return;
+        }
+
+        this.jump();
+        playSound("./audio/Pepe_Jump.wav", 0.1);
+    }
+
+    /**
+     * Updates the horizontal camera position relative to the character.
+     * @returns {void}
+    */
+    updateCamera() {
+        this.world.camera_x = -this.x + 100;
+    }
+
+
+    /**
+     * Starts the character animation loop.
+     * @returns {void}
+    */
+    startCharacterAnimationLoop() {
+        setInterval(() => {
+            this.updateCharacterAnimation();
         }, 100);
     }
 
+    /**
+     * Selects the correct animation based on the current character state.
+     * @returns {void}
+    */
+    updateCharacterAnimation() {
+        if (this.isDead()) {
+            this.handleDeadAnimation();
+        } else if (this.isHurt()) {
+            this.handleHurtAnimation();
+        } else if (this.isAboveGround()) {
+            this.handleJumpAnimation();
+        } else {
+            this.handleGroundAnimation();
+        }
+    }
+
+    /**
+     * Handles the character's death animation and game-over sequence.
+     * @returns {void}
+    */
+    handleDeadAnimation() {
+        this.startDeadAnimation();
+        this.playDeadAnimation(this.IMAGES_DEAD);
+        this.stopSnoring();
+        this.showLostScreenAfterDeath();
+    }
+
+    /**
+     * Initializes the death animation and plays the death sound once.
+     * @returns {void}
+    */
+    startDeadAnimation() {
+        if (this.deadAnimationStarted) {
+            return;
+        }
+
+        this.currentImage = 0;
+        this.deadAnimationStarted = true;
+        this.speed = 0;
+        playSound("./audio/Pepe_death.mp3", 0.03);
+    }
+
+    /**
+     * Plays the hurt animation and damage sound.
+     * @returns {void}
+    */
+    handleHurtAnimation() {
+        this.playAnimation(this.IMAGES_HURT);
+        playSound("./audio/Pepe_gets_dmg.oga", 0.03);
+        this.stopSnoring();
+    }
+
+    /**
+     * Plays the jump animation and stops the snoring sound.
+     * @returns {void}
+    */
+    handleJumpAnimation() {
+        this.playAnimation(this.IMAGES_JUMPING);
+        this.stopSnoring();
+    }
+
+    /**
+     * Selects the correct animation while the character is on the ground.
+     * @returns {void}
+    */
+    handleGroundAnimation() {
+        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            this.handleWalkAnimation();
+        } else if (this.isLongAfk()) {
+            this.handleAfkAnimation();
+        } else if (this.isIdle()) {
+            this.playAnimation(this.IMAGES_IDLE);
+        }
+    }
+
+    /**
+     * Plays the walking animation and stops the snoring sound.
+     * @returns {void}
+    */
+    handleWalkAnimation() {
+        this.playAnimation(this.IMAGES_WALKING);
+        this.stopSnoring();
+    }
+
+    /**
+     * Plays the long-idle animation and starts the snoring sound.
+     * @returns {void}
+    */
+    handleAfkAnimation() {
+        this.playAnimation(this.IMAGES_AFK);
+        this.startSnoring();
+    }
+
+    /**
+     * Schedules the game-lost screen after the final death frame.
+     * The screen is scheduled only once.
+     * @returns {void}
+    */
+    showLostScreenAfterDeath() {
+        if (this.currentImage !== 6 || this.lostScreenScheduled) {
+            return;
+        }
+
+        this.lostScreenScheduled = true;
+
+        setTimeout(() => {
+            showGameLostScreen();
+        }, 500);
+    }
 }

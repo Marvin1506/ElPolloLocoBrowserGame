@@ -14,6 +14,7 @@ const backgroundMusic = new Audio("./audio/mfcc-mexican-mexican-mexico-mariachi-
 const muteButton = document.getElementById("mute-button");
 const fullscreenButton = document.getElementById("fullscreen-button");
 const restartScreenPicture = document.getElementById("lost-screen");
+const restartScreenPictureWin = document.getElementById("won-screen");
 const restartScreenPictureDiv = document.getElementById("end-screen");
 const restartButton = document.getElementById("restart-button");
 const mobileFlexBox = document.getElementById("mobile-button-flexbox");
@@ -21,10 +22,8 @@ backgroundMusic.volume = 0.005;
 backgroundMusic.loop = true;
 
 /**
- * Initializes the canvas, hides the mobile controls and starts the
- * background music after the user's first click.
- * The click listener is required because browsers usually block audio
- * playback until the user interacts with the page.
+ * Initializes the canvas, hides the mobile controls and starts the background music after the user's first click.
+ * The click listener is required because browsers usually block audio playback until the user interacts with the page.
  * @returns {void}
 */
 function init() {
@@ -335,7 +334,7 @@ function preventTouchDefault(event) {
 function showGameWonScreen() {
     gameState = "won";
     const canvas = document.getElementById("canvas");
-    restartScreenPicture.classList.remove("display-none");
+    restartScreenPictureWin.classList.remove("display-none");
     restartScreenPictureDiv.classList.remove("display-none");
     restartButton.classList.remove("display-none");
     canvas.classList.add("opacity");
@@ -352,7 +351,7 @@ function showGameWonScreen() {
 */
 function hideGameWonScreen() {
     const canvas = document.getElementById("canvas");
-    restartScreenPicture.classList.add("display-none");
+    restartScreenPictureWin.classList.add("display-none");
     restartScreenPictureDiv.classList.add("display-none");
     restartButton.classList.add("display-none");
     canvas.classList.remove("opacity");
