@@ -1,3 +1,6 @@
+/**
+ * Represents a throwable salsa bottle.
+*/
 class ThrowableObject extends movableObject {
     
     IMAGES_THROWING = [
@@ -25,6 +28,13 @@ class ThrowableObject extends movableObject {
 
     hasHit = false;
 
+    /**
+     * Creates a new throwable bottle.
+     *
+     * @param {number} x The starting x position.
+     * @param {number} y The starting y position.
+     * @param {boolean} otherDirection Indicates whether the bottle is thrown to the left.
+    */
     constructor(x, y, otherDirection) {
         super().loadImage("img/6_salsa_bottle/salsa_bottle.png");
         this.loadImages(this.IMAGES_THROWING);
@@ -39,9 +49,22 @@ class ThrowableObject extends movableObject {
         this.throw();
     }
 
+    /**
+     * Throws the bottle by applying gravity, movement, and animations.
+     * @returns {void}
+    */
     throw() {
         this.speedY = 30;
         this.applyGravity();
+        this.startMovement();
+        this.startAnimation();
+    }
+
+    /**
+     * Starts the bottle movement.
+     * @returns {void}
+    */
+    startMovement() {
         setInterval(() => {
             if (!this.hasHit) {
                 if (this.otherDirection) {
@@ -51,6 +74,13 @@ class ThrowableObject extends movableObject {
                 }
             }
         }, 25);
+    }
+
+    /**
+     * Starts the bottle animation.
+     * @returns {void}
+    */
+    startAnimation() {
         setInterval(() => {
             if (this.hasHit) {
                 this.playAnimation(this.IMAGES_HITTING);
@@ -60,6 +90,10 @@ class ThrowableObject extends movableObject {
         }, 80);
     }
 
+    /**
+     * Plays the bottle splash animation after a collision.
+     * @returns {void}
+    */
     splash() {
         this.hasHit = true;
         this.speedY = 0;
