@@ -13,10 +13,10 @@ class Bottle extends DrawableObject {
     ];
 
     offset = {
-        top: 16, //120 offset für pepe
-        bottom: 10, //30
-        left: 20, //40
-        right: 20 //30
+        top: 16,
+        bottom: 10,
+        left: 20,
+        right: 20
     } 
 
     width = 80;
