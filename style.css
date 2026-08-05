@@ -446,9 +446,8 @@ canvas {
 
 @media (hover: none) and (pointer: coarse) and (orientation: landscape) {
     .game-content {
-        width: min(100vw, 100%);
-        height: min(100vh, 100%);
-
+        width: min(100vw, calc(100vh * 2.1));
+        height: min(100dvh, calc(100vw / 1.5));
         margin: auto;
     }
 
