@@ -48,18 +48,12 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
-        }, 1000 / 180);
-         setInterval(() => {
-            this.checkThrowObjects();
-        }, 100);
-        setInterval(() => {
-            this.checkBottleCollisions();
-            this.checkCoinCollisions();
-        }, 100);
-         setInterval(() => {
             this.checkBottleCollisionsWithEnemyChicken();
         }, 1000 / 60);
         setInterval(() => {
+            this.checkThrowObjects();
+            this.checkBottleCollisions();
+            this.checkCoinCollisions();
             this.checkBossBarPosition();
         }, 100);
     }
