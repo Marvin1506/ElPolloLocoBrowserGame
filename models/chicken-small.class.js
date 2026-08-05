@@ -1,3 +1,8 @@
+/**
+ * Represents a small chicken enemy.
+ * Handles movement, walking animation, death animation
+ * and randomly played chicken sounds.
+*/
 class ChickenSmall extends movableObject{
     y = 378;
     height = 40;
@@ -22,6 +27,11 @@ class ChickenSmall extends movableObject{
         right: 3,
     } 
 
+    /**
+     * Creates a small chicken enemy.
+     * Loads all animations, sets a random position and speed,
+     * starts the animation loops and enables random chicken sounds.
+    */
     constructor() {
         super().loadImage("img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
         this.loadImages(this.IMAGES_WALKING);
@@ -34,6 +44,10 @@ class ChickenSmall extends movableObject{
         this.startRandomChickenSounds();
     }
 
+    /**
+     * Starts the movement and animation loops.
+     * @returns {void}
+    */
     animate() {
         setInterval(() => {
             this.moveLeft();
@@ -48,6 +62,11 @@ class ChickenSmall extends movableObject{
         }, 200);
     }
 
+    /**
+     * Marks the chicken as dead, stops its movement
+     * and plays the death sound.
+     * @returns {void}
+    */
     dieChickenSmall() {
         this.isDeadChickenSmall = true;
         this.currentImage = 0;
@@ -55,6 +74,11 @@ class ChickenSmall extends movableObject{
         playSound("./audio/chicken_dies.wav", 0.1);
     }
 
+    /**
+     * Plays chicken sounds at random intervals
+     * while the chicken is alive.
+     * @returns {void}
+    */
     startRandomChickenSounds() {
         const randomDelay = 2500 + Math.random() * 5000;
 
