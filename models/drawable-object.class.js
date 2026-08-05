@@ -1,3 +1,7 @@
+/**
+ * Represents the base class for all drawable game objects.
+ * Provides image loading, image caching, and drawing functionality.
+*/
 class DrawableObject {
     img;
     imageCache = {}; //savepoint of images that are already loaded
@@ -14,17 +18,30 @@ class DrawableObject {
     } 
 
 
-    //loads the image of the object and sets the src of the image to the path of the image
+    /**
+     * Loads a single image from the given path.
+     * @param {string} path The path to the image.
+     * @returns {void}
+    */
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
     }
 
+    /**
+     * Draws the object on the canvas.
+     * @param {CanvasRenderingContext2D} ctx The canvas rendering context.
+     * @returns {void}
+    */
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
-    //turns the objects into imgs and pushes the already loaded imgs into the imageCache object array
+    /**
+     * Loads multiple images and stores them in the image cache.
+     * @param {string[]} arr An array of image paths.
+     * @returns {void}
+    */
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();
@@ -33,6 +50,13 @@ class DrawableObject {
         });
     }
 
+    /**
+     * Draws the collision and hitbox outlines for debugging purposes.
+     * This method is intended for development and testing only.
+     *
+     * @param {CanvasRenderingContext2D} ctx The canvas rendering context.
+     * @returns {void}
+    */
     /*drawFrame(ctx) {
         if(this instanceof Character || this instanceof ChickenSmall || this instanceof Chicken){
             ctx.beginPath();

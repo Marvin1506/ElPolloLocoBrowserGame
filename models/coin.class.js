@@ -1,3 +1,6 @@
+/**
+ * Represents a collectible coin in the game.
+*/
 class Coin extends movableObject {
 
     IMAGES_COIN = [
@@ -6,10 +9,10 @@ class Coin extends movableObject {
     ];
 
     offset = {
-        top: 0, //120 offset für pepe
-        bottom: 0, //30
-        left: 0, //40
-        right: 0 //30
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
     } 
 
     width = 100;
@@ -18,6 +21,9 @@ class Coin extends movableObject {
     y = 350;
     static lastX = 200;
 
+    /**
+     * Creates a coin with a random position and starts its animation.
+    */
     constructor() {
         super().loadImage("img/8_coin/coin_1.png");
         this.loadImages(this.IMAGES_COIN);
@@ -27,6 +33,10 @@ class Coin extends movableObject {
         this.animate();
     }
 
+    /**
+     * Starts the coin animation.
+     * @returns {void}
+    */
     animate() {
         setInterval(() => {
             this.playAnimation(this.IMAGES_COIN);
