@@ -1,3 +1,6 @@
+/**
+ * Represents the final boss enemy in the game.
+*/
 class Endboss extends movableObject {
 
     height = 400;
@@ -13,10 +16,10 @@ class Endboss extends movableObject {
     walkPhaseStartTime = 0;
 
     offset = {
-        top: 110, //120 offset für pepe
-        bottom: 30, //30
-        left: 35, //40
-        right: 30 //30
+        top: 110,
+        bottom: 30,
+        left: 35,
+        right: 30
     }
 
     IMAGES_WALK = [
@@ -60,6 +63,9 @@ class Endboss extends movableObject {
         "img/4_enemie_boss_chicken/4_hurt/G23.png",
     ];
 
+    /**
+     * Creates the end boss and loads all required images.
+    */
     constructor() {
         super().loadImage("img/4_enemie_boss_chicken/2_alert/G5.png");
         this.loadImages(this.IMAGES_WALK);
@@ -70,15 +76,27 @@ class Endboss extends movableObject {
         this.x = 2600;
     }
 
+    /**
+     * Checks whether the boss is dead.
+     * @returns {boolean} True if the boss has no energy left.
+    */
     isDead() {
         return this.energy === 0;
     }
 
+    /**
+     * Starts the boss movement and animation loops.
+     * @returns {void}
+    */
     animate() {
         this.animateImages();
         this.animateMovement();
     }
 
+    /**
+     * Starts the boss image animation loop.
+     * @returns {void}
+    */
     animateImages() {
         setInterval(() => {
             if (this.isDead()) {
@@ -93,6 +111,10 @@ class Endboss extends movableObject {
         }, 100);
     }
 
+    /**
+     * Starts the boss movement loop.
+     * @returns {void}
+    */
     animateMovement() {
         setInterval(() => {
             if (this.bossState === "walking" && !this.isDead() && !this.isHurt()) {
@@ -101,6 +123,10 @@ class Endboss extends movableObject {
         }, 1000 / 60);
     }
 
+    /**
+     * Updates the boss animation based on its current state.
+     * @returns {void}
+    */
     handleBossImages() {
         const pepeX = this.world.character.x;
 
@@ -118,6 +144,11 @@ class Endboss extends movableObject {
         }
     }
 
+    /**
+     * Checks whether the boss should remain idle until the player reaches it.
+     * @param {number} pepeX The player's current x position.
+     * @returns {boolean} True if the boss should remain waiting.
+    */
     isWaitingForPepe(pepeX) {
         if (!this.bossActivated && pepeX >= 2000) {
             this.bossActivated = true;
@@ -132,6 +163,10 @@ class Endboss extends movableObject {
         return false;
     }
 
+    /**
+     * Starts the walking phase of the boss.
+     * @returns {void}
+    */
     startWalkingPhase() {
         this.bossState = "walking";
         this.walkPhaseStartTime = Date.now();
@@ -140,6 +175,10 @@ class Endboss extends movableObject {
         this.speed = 2;
     }
 
+    /**
+     * Handles the walking animation and switches to the attack phase when finished.
+     * @returns {void}
+    */
     handleWalkingPhase() {
         this.playAnimation(this.IMAGES_WALK);
 
@@ -150,12 +189,20 @@ class Endboss extends movableObject {
         }
     }
 
+    /**
+     * Starts the boss attack phase.
+     * @returns {void}
+    */
     startAttackPhase() {
         this.bossState = "attacking";
         this.attackImageIndex = 0;
         this.speed = 0;
     }
 
+    /**
+     * Plays the boss attack animation.
+     * @returns {void}
+    */
     handleAttackPhase() {
         if (this.attackImageIndex < this.IMAGES_ATTACK.length) {
             const path = this.IMAGES_ATTACK[this.attackImageIndex];
@@ -168,6 +215,10 @@ class Endboss extends movableObject {
         this.startWalkingPhase();
     }
 
+    /**
+     * Plays the boss death animation and ends the game when finished.
+     * @returns {void}
+    */
     handleDeadAnimation() {
         if (!this.deadAnimationStarted) {
             this.currentImage = 0;
