@@ -210,45 +210,51 @@ window.addEventListener("keyup", (event) => {
     }
 });
 
+function preventTouchDefault(event) {
+    if (event.cancelable) {
+        event.preventDefault();
+    }
+}
+
 leftBtn.addEventListener("touchstart", (event) => {
-    event.preventDefault();
+    preventTouchDefault(event);
     keyboard.LEFT = true;
-});
+}, { passive: false });
 
 leftBtn.addEventListener("touchend", (event) => {
-    event.preventDefault();
+    preventTouchDefault(event);
     keyboard.LEFT = false;
-});
+}, { passive: false });
 
 rightBtn.addEventListener("touchstart", (event) => {
-    event.preventDefault();
+    preventTouchDefault(event);
     keyboard.RIGHT = true;
-});
+}, { passive: false });
 
 rightBtn.addEventListener("touchend", (event) => {
-    event.preventDefault();
+    preventTouchDefault(event);
     keyboard.RIGHT = false;
-});
+}, { passive: false });
 
 jumpBtn.addEventListener("touchstart", (event) => {
-    event.preventDefault();
+    preventTouchDefault(event);
     keyboard.SPACE = true;
-});
+}, { passive: false });
 
 jumpBtn.addEventListener("touchend", (event) => {
-    event.preventDefault();
+    preventTouchDefault(event);
     keyboard.SPACE = false;
-});
+}, { passive: false });
 
 throwBtn.addEventListener("touchstart", (event) => {
-    event.preventDefault();
+    preventTouchDefault(event);
     keyboard.D = true;
-});
+}, { passive: false });
 
 throwBtn.addEventListener("touchend", (event) => {
-    event.preventDefault();
+    preventTouchDefault(event);
     keyboard.D = false;
-});
+}, { passive: false });
 
 function showGameWonScreen() {
     gameState = "won";
