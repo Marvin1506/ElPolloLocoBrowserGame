@@ -181,6 +181,14 @@ canvas {
     background-color: #d62828;
 }
 
+.control-panel,
+.mobile-button-flexbox {
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
 @font-face {
     font-family: 'zabras';
     src:url('img/10_font/zabars.ttf') format('woff'), /* Modern Browsers */
