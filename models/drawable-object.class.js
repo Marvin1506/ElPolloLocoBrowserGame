@@ -21,7 +21,6 @@ class DrawableObject {
     /**
      * Loads a single image from the given path.
      * @param {string} path The path to the image.
-     * @returns {void}
     */
     loadImage(path) {
         this.img = new Image();
@@ -31,7 +30,6 @@ class DrawableObject {
     /**
      * Draws the object on the canvas.
      * @param {CanvasRenderingContext2D} ctx The canvas rendering context.
-     * @returns {void}
     */
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -40,7 +38,6 @@ class DrawableObject {
     /**
      * Loads multiple images and stores them in the image cache.
      * @param {string[]} arr An array of image paths.
-     * @returns {void}
     */
     loadImages(arr) {
         arr.forEach((path) => {
@@ -55,7 +52,6 @@ class DrawableObject {
      * This method is intended for development and testing only.
      *
      * @param {CanvasRenderingContext2D} ctx The canvas rendering context.
-     * @returns {void}
     */
     /*drawFrame(ctx) {
         if(this instanceof Character || this instanceof ChickenSmall || this instanceof Chicken){

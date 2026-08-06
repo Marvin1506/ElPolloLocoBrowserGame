@@ -86,7 +86,6 @@ class Endboss extends movableObject {
 
     /**
      * Starts the boss movement and animation loops.
-     * @returns {void}
     */
     animate() {
         this.animateImages();
@@ -95,7 +94,6 @@ class Endboss extends movableObject {
 
     /**
      * Starts the boss image animation loop.
-     * @returns {void}
     */
     animateImages() {
         setInterval(() => {
@@ -113,7 +111,6 @@ class Endboss extends movableObject {
 
     /**
      * Starts the boss movement loop.
-     * @returns {void}
     */
     animateMovement() {
         setInterval(() => {
@@ -125,7 +122,6 @@ class Endboss extends movableObject {
 
     /**
      * Updates the boss animation based on its current state.
-     * @returns {void}
     */
     handleBossImages() {
         const pepeX = this.world.character.x;
@@ -165,7 +161,6 @@ class Endboss extends movableObject {
 
     /**
      * Starts the walking phase of the boss.
-     * @returns {void}
     */
     startWalkingPhase() {
         this.bossState = "walking";
@@ -177,7 +172,6 @@ class Endboss extends movableObject {
 
     /**
      * Handles the walking animation and switches to the attack phase when finished.
-     * @returns {void}
     */
     handleWalkingPhase() {
         this.playAnimation(this.IMAGES_WALK);
@@ -191,7 +185,6 @@ class Endboss extends movableObject {
 
     /**
      * Starts the boss attack phase.
-     * @returns {void}
     */
     startAttackPhase() {
         this.bossState = "attacking";
@@ -201,7 +194,6 @@ class Endboss extends movableObject {
 
     /**
      * Plays the boss attack animation.
-     * @returns {void}
     */
     handleAttackPhase() {
         if (this.attackImageIndex < this.IMAGES_ATTACK.length) {
@@ -217,7 +209,6 @@ class Endboss extends movableObject {
 
     /**
      * Plays the boss death animation and ends the game when finished.
-     * @returns {void}
     */
     handleDeadAnimation() {
         if (!this.deadAnimationStarted) {

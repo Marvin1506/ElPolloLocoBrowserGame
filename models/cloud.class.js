@@ -19,7 +19,6 @@ class Cloud extends movableObject{
 
     /**
      * Starts the cloud movement animation.
-     * @returns {void}
     */
     animate() {
         setInterval(() => {

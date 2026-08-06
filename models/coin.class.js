@@ -35,7 +35,6 @@ class Coin extends movableObject {
 
     /**
      * Starts the coin animation.
-     * @returns {void}
     */
     animate() {
         setInterval(() => {

@@ -12,7 +12,6 @@ class movableObject extends DrawableObject {
 
     /**
      * Applies gravity to the object.
-     * @returns {void}
     */
     applyGravity() {
         setInterval(() => {
@@ -62,7 +61,6 @@ class movableObject extends DrawableObject {
 
     /**
      * Reduces the object's energy after taking damage.
-     * @returns {void}
     */
     hit() {
         this.energy -= 20;
@@ -94,7 +92,6 @@ class movableObject extends DrawableObject {
     /**
      * Plays a looping animation.
      * @param {string[]} images The animation image paths.
-     * @returns {void}
     */
     playAnimation(images) {
         let i = this.currentImage % images.length; // for loop that resets and begins again when the last image is reached
@@ -106,7 +103,6 @@ class movableObject extends DrawableObject {
     /**
      * Plays a non-looping death animation.
      * @param {string[]} images The death animation image paths.
-     * @returns {void}
     */
     playDeadAnimation(images) {
         if (this.currentImage < images.length) {
@@ -120,7 +116,6 @@ class movableObject extends DrawableObject {
 
     /**
      * Moves the object to the right.
-     * @returns {void}
     */
     moveRight() {
         this.x += this.speed;
@@ -128,7 +123,6 @@ class movableObject extends DrawableObject {
 
     /**
      * Moves the object to the left.
-     * @returns {void}
     */
     moveLeft() {
         this.x -= this.speed;
@@ -136,7 +130,6 @@ class movableObject extends DrawableObject {
 
     /**
      * Makes the object jump.
-     * @returns {void}
     */
     jump() {
         this.speedY = 23.0;

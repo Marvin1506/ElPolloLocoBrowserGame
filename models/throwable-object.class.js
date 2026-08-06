@@ -51,7 +51,6 @@ class ThrowableObject extends movableObject {
 
     /**
      * Throws the bottle by applying gravity, movement, and animations.
-     * @returns {void}
     */
     throw() {
         this.speedY = 30;
@@ -62,7 +61,6 @@ class ThrowableObject extends movableObject {
 
     /**
      * Starts the bottle movement.
-     * @returns {void}
     */
     startMovement() {
         setInterval(() => {
@@ -78,7 +76,6 @@ class ThrowableObject extends movableObject {
 
     /**
      * Starts the bottle animation.
-     * @returns {void}
     */
     startAnimation() {
         setInterval(() => {
@@ -92,7 +89,6 @@ class ThrowableObject extends movableObject {
 
     /**
      * Plays the bottle splash animation after a collision.
-     * @returns {void}
     */
     splash() {
         this.hasHit = true;

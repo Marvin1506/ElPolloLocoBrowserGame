@@ -30,7 +30,6 @@ class StatusBarCoins extends DrawableObject {
     /**
      * Updates the displayed coin percentage.
      * @param {number} percentage The current coin percentage.
-     * @returns {void}
     */
     setPercentage(percentage) {
         this.percentage = percentage;

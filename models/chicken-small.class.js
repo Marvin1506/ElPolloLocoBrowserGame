@@ -46,7 +46,6 @@ class ChickenSmall extends movableObject{
 
     /**
      * Starts the movement and animation loops.
-     * @returns {void}
     */
     animate() {
         setInterval(() => {
@@ -65,7 +64,6 @@ class ChickenSmall extends movableObject{
     /**
      * Marks the chicken as dead, stops its movement
      * and plays the death sound.
-     * @returns {void}
     */
     dieChickenSmall() {
         this.isDeadChickenSmall = true;
@@ -77,7 +75,6 @@ class ChickenSmall extends movableObject{
     /**
      * Plays chicken sounds at random intervals
      * while the chicken is alive.
-     * @returns {void}
     */
     startRandomChickenSounds() {
         const randomDelay = 2500 + Math.random() * 5000;

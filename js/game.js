@@ -24,7 +24,6 @@ backgroundMusic.loop = true;
 /**
  * Initializes the canvas, hides the mobile controls and starts the background music after the user's first click.
  * The click listener is required because browsers usually block audio playback until the user interacts with the page.
- * @returns {void}
 */
 function init() {
     canvas = document.getElementById("canvas");
@@ -38,7 +37,6 @@ function init() {
 
 /**
  * Initializes and starts a new game.
- * @returns {void}
 */
 function initGame() {
     startNewGame();
@@ -49,7 +47,6 @@ function initGame() {
  * The current end screen is hidden, the previous game is stopped and
  * a new game instance is created.
  * @param {MouseEvent} event - Click event from the restart button.
- * @returns {void}
 */
 function restartGame(event) {
     event.currentTarget.blur();
@@ -66,7 +63,6 @@ function restartGame(event) {
 /**
  * Creates a new level and a new world instance.
  * It also updates the game state and displays the available game controls.
- * @returns {void}
 */
 function startNewGame() {
     initLevel();
@@ -82,7 +78,6 @@ function startNewGame() {
  * Stops the current game and resets its resources.
  * The animation frame and intervals are stopped, the keyboard state is
  * reset and the canvas is cleared.
- * @returns {void}
 */
 function stopGame() {
     if (world) {
@@ -97,7 +92,6 @@ function stopGame() {
 
 /**
  * Resets all keyboard input states.
- * @returns {void}
 */
 function resetKeyboard() {
     keyboard.LEFT = false;
@@ -110,7 +104,6 @@ function resetKeyboard() {
 
 /**
  * Clears the complete game canvas.
- * @returns {void}
 */
 function clearCanvas() {
     const ctx = canvas.getContext("2d");
@@ -119,7 +112,6 @@ function clearCanvas() {
 
 /**
  * Clears all active JavaScript intervals within the selected ID range.
- * @returns {void}
 */
 function stopAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
@@ -129,7 +121,6 @@ function stopAllIntervals() {
  * Toggles all game audio between muted and unmuted.
  * The setting is applied to the background music and all currently
  * active sound effects.
- * @returns {void}
 */
 function toggleSound() {
     soundMuted = !soundMuted;
@@ -146,7 +137,6 @@ function toggleSound() {
  * No sound is created while the game is muted.
  * @param {string} soundPath - Relative path to the audio file.
  * @param {number} volume - Playback volume between 0 and 1.
- * @returns {void}
 */
 function playSound(soundPath, volume) {
     if (soundMuted) {
@@ -164,7 +154,6 @@ function playSound(soundPath, volume) {
 /**
  * Removes an audio object from the active sound list.
  * @param {HTMLAudioElement} sound - Audio object that should be removed.
- * @returns {void}
 */
 function removeActiveSound(sound) {
     const soundIndex = activeSounds.indexOf(sound);
@@ -177,7 +166,6 @@ function removeActiveSound(sound) {
  * Plays the sound of a normal chicken.
  * The sound only starts while the game is running and while no other
  * normal chicken sound is currently playing.
- * @returns {void}
 */
 function playChickenSound() {
     if (soundMuted || gameState !== "playing" || chickenSoundIsPlaying) {
@@ -198,7 +186,6 @@ function playChickenSound() {
  * Plays the sound of a small chicken.
  * The sound only starts while the game is running and while no other
  * small chicken sound is currently playing.
- * @returns {void}
 */
 function playSmallChickenSound() {
     if (soundMuted || gameState !== "playing" || smallChickenSoundIsPlaying) {
@@ -218,7 +205,6 @@ function playSmallChickenSound() {
 /**
  * Updates the sound icon and the background color of the start-screen
  * mute button.
- * @returns {void}
 */
 function updateSoundIcon() {
     const soundIcon = document.getElementById("sound-icon");
@@ -320,7 +306,6 @@ throwBtn.addEventListener("touchend", (event) => {
 /**
  * Prevents the browser's default touch behavior when the event is cancelable.
  * @param {TouchEvent} event - Touch event triggered by a control button.
- * @returns {void}
 */
 function preventTouchDefault(event) {
     if (event.cancelable) {
@@ -330,7 +315,6 @@ function preventTouchDefault(event) {
 
 /**
  * Displays the game-won screen and hides the game controls.
- * @returns {void}
 */
 function showGameWonScreen() {
     gameState = "won";
@@ -348,7 +332,6 @@ function showGameWonScreen() {
 
 /**
  * Hides the game-won screen and restores the game display.
- * @returns {void}
 */
 function hideGameWonScreen() {
     const canvas = document.getElementById("canvas");
@@ -361,7 +344,6 @@ function hideGameWonScreen() {
 
 /** 
  * Displays the game-lost screen and hides the game controls.
- * @returns {void}
 */
 function showGameLostScreen() {
     const canvas = document.getElementById("canvas");
@@ -378,7 +360,6 @@ function showGameLostScreen() {
 
 /**
  * Hides the game-lost screen and restores the game display.
- * @returns {void}
 */
 function hideGameLostScreen() {
     const canvas = document.getElementById("canvas");
@@ -391,7 +372,6 @@ function hideGameLostScreen() {
 
 /**
  * Leaves fullscreen mode after the game has ended.
- * @returns {void}
 */
 function closeFullscreenAfterGame() {
     if (document.fullscreenElement) {

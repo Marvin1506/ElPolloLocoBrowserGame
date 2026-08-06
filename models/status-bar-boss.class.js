@@ -31,7 +31,6 @@ class StatusBarBoss extends DrawableObject {
     /**
      * Updates the displayed health percentage of the boss.
      * @param {number} percentage The boss's current health percentage.
-     * @returns {void}
     */
     setPercentage(percentage) {
         this.percentage = percentage;

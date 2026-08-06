@@ -144,7 +144,6 @@ class Character extends movableObject {
      * Starts the looping snoring sound.
      * No new sound is started while Pepe is already snoring
      * or while the game is muted.
-     * @returns {void}
     */
     startSnoring() {
         if (this.isSnoring || soundMuted) {
@@ -162,7 +161,6 @@ class Character extends movableObject {
 
     /**
      * Stops the snoring sound and removes it from the active sound list.
-     * @returns {void}
     */
     stopSnoring() {
         if (!this.snoringSound) {
@@ -178,7 +176,6 @@ class Character extends movableObject {
 
     /**
      * Starts the character movement and animation loops.
-     * @returns {void}
     */
     animate() {
         this.startMovementLoop();
@@ -187,7 +184,6 @@ class Character extends movableObject {
 
     /**
      * Starts the movement loop at approximately 60 updates per second.
-     * @returns {void}
     */
     startMovementLoop() {
         setInterval(() => {
@@ -197,7 +193,6 @@ class Character extends movableObject {
 
     /**
      * Handles player input, movement, jumping and camera positioning.
-     * @returns {void}
     */
     handleMovement() {
         this.updateLastInput();
@@ -208,7 +203,6 @@ class Character extends movableObject {
 
     /**
      * Updates the timestamp of the most recent player input.
-     * @returns {void}
     */
     updateLastInput() {
         if (this.world.keyboard.RIGHT ||
@@ -222,7 +216,6 @@ class Character extends movableObject {
 
     /**
      * Moves the character horizontally based on the keyboard state.
-     * @returns {void}
     */
     moveCharacter() {
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -239,7 +232,6 @@ class Character extends movableObject {
     /**
      * Makes the character jump when the jump key is pressed
      * and the character is standing on the ground.
-     * @returns {void}
     */
     handleJump() {
         if (!this.world.keyboard.SPACE || this.isAboveGround()) {
@@ -252,7 +244,6 @@ class Character extends movableObject {
 
     /**
      * Updates the horizontal camera position relative to the character.
-     * @returns {void}
     */
     updateCamera() {
         this.world.camera_x = -this.x + 100;
@@ -261,7 +252,6 @@ class Character extends movableObject {
 
     /**
      * Starts the character animation loop.
-     * @returns {void}
     */
     startCharacterAnimationLoop() {
         setInterval(() => {
@@ -271,7 +261,6 @@ class Character extends movableObject {
 
     /**
      * Selects the correct animation based on the current character state.
-     * @returns {void}
     */
     updateCharacterAnimation() {
         if (this.isDead()) {
@@ -287,7 +276,6 @@ class Character extends movableObject {
 
     /**
      * Handles the character's death animation and game-over sequence.
-     * @returns {void}
     */
     handleDeadAnimation() {
         this.startDeadAnimation();
@@ -298,7 +286,6 @@ class Character extends movableObject {
 
     /**
      * Initializes the death animation and plays the death sound once.
-     * @returns {void}
     */
     startDeadAnimation() {
         if (this.deadAnimationStarted) {
@@ -313,7 +300,6 @@ class Character extends movableObject {
 
     /**
      * Plays the hurt animation and damage sound.
-     * @returns {void}
     */
     handleHurtAnimation() {
         this.playAnimation(this.IMAGES_HURT);
@@ -323,7 +309,6 @@ class Character extends movableObject {
 
     /**
      * Plays the jump animation and stops the snoring sound.
-     * @returns {void}
     */
     handleJumpAnimation() {
         this.playAnimation(this.IMAGES_JUMPING);
@@ -332,7 +317,6 @@ class Character extends movableObject {
 
     /**
      * Selects the correct animation while the character is on the ground.
-     * @returns {void}
     */
     handleGroundAnimation() {
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
@@ -346,7 +330,6 @@ class Character extends movableObject {
 
     /**
      * Plays the walking animation and stops the snoring sound.
-     * @returns {void}
     */
     handleWalkAnimation() {
         this.playAnimation(this.IMAGES_WALKING);
@@ -355,7 +338,6 @@ class Character extends movableObject {
 
     /**
      * Plays the long-idle animation and starts the snoring sound.
-     * @returns {void}
     */
     handleAfkAnimation() {
         this.playAnimation(this.IMAGES_AFK);
@@ -365,7 +347,6 @@ class Character extends movableObject {
     /**
      * Schedules the game-lost screen after the final death frame.
      * The screen is scheduled only once.
-     * @returns {void}
     */
     showLostScreenAfterDeath() {
         if (this.currentImage !== 6 || this.lostScreenScheduled) {
