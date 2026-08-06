@@ -4,7 +4,7 @@ let keyboard = new Keyboard();
 let gameState = "start";
 let chickenSoundIsPlaying = false;
 let smallChickenSoundIsPlaying = false;
-let soundMuted = false;
+let soundMuted = localStorage.getItem("soundMuted") === "true";
 const leftBtn = document.getElementById("left");
 const rightBtn = document.getElementById("right");
 const jumpBtn = document.getElementById("jump");
@@ -29,6 +29,8 @@ function init() {
     canvas = document.getElementById("canvas");
     const mobileFlexBox = document.getElementById("mobile-button-flexbox");
     mobileFlexBox.classList.add("display-none");
+    updateSoundState();
+    updateSoundIcon();
     document.addEventListener("click",() => {
         backgroundMusic.play();
     }, { once: true });
@@ -119,16 +121,25 @@ function stopAllIntervals() {
 
 /**
  * Toggles all game audio between muted and unmuted.
- * The setting is applied to the background music and all currently
- * active sound effects.
+ * The setting is applied to the background music and all currently active sound effects.
+ * Toggles the sound icons.
 */
 function toggleSound() {
     soundMuted = !soundMuted;
+    localStorage.setItem("soundMuted", soundMuted);
+    updateSoundState();
+    updateSoundIcon();
+}
+
+/**
+ * Updates the muted state of the background music and all active sounds.
+ * The state is determined by the global soundMuted variable.
+*/
+function updateSoundState() {
     backgroundMusic.muted = soundMuted;
     activeSounds.forEach(sound => {
         sound.muted = soundMuted;
     });
-    updateSoundIcon();
 }
 
 /**
@@ -209,12 +220,16 @@ function playSmallChickenSound() {
 function updateSoundIcon() {
     const soundIcon = document.getElementById("sound-icon");
     const soundButton = document.getElementById("mute-button-start");
+    const startIcon = document.getElementById("sound-icon-start");
     soundIcon.src = soundMuted ? "./img/11_buttons/muted.svg" : "./img/11_buttons/sound_on.svg";
+    startIcon.src = soundMuted ? "./img/11_buttons/muted.svg" : "./img/11_buttons/sound_on.svg";
     if (soundButton) {
         if (soundMuted) {
+            soundIcon.src = "./img/11_buttons/muted.svg";
             soundButton.style.background = "rgba(220, 53, 69, 0.95)";
         } else {
-            soundButton.style.background = "rgba(255, 170, 0, 0.85)";
+            soundIcon.src = "./img/11_buttons/sound_on.svg";
+            soundButton.style.background = "rgba(238, 138, 45, 0.95)";
         }
     }
 }

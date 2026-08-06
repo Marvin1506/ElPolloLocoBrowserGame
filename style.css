@@ -80,6 +80,13 @@ canvas {
     cursor: pointer;
 }
 
+
+.button-icon-flexbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .start-menu-button:hover {
     transform: scale(1.08);
     background-color: rgb(221, 104, 26);
