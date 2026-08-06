@@ -42,10 +42,13 @@ This project helped me improve my skills in:
 - Managing game states and interactions
 - Debugging complex JavaScript logic
 
-## Live Demo not finished right now
+## Live Demo
 
 https://marvin-mutwil.developerakademie.net/A-Developer-Akademie-Projekte/ElPolloLocoBrowserGame/index.html
 
 ## Preview
+
+https://github.com/user-attachments/assets/480ef8f7-bad3-4b0d-b4a7-ab4a939e9d15
+
 
 <img width="712" height="473" alt="Screenshot 2026-07-07 013615" src="https://github.com/user-attachments/assets/da2fb05e-7f45-4005-958e-86d370992b9a" />
