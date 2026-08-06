@@ -464,6 +464,36 @@ canvas {
         justify-content: flex-start;
         align-items: center;
     }
+
+    .controls-screen {
+        min-width: 260px;
+        max-height: 85svh;
+
+        padding: 12px 24px;
+
+        font-size: 20px;
+        line-height: 1.1;
+    }
+
+    .controls-screen h2 {
+        margin: 0 0 8px 0;
+        font-size: 26px;
+    }
+
+    .controls-list {
+        margin: 0 0 8px 0;
+        font-size: 18px;
+        line-height: 1.2;
+    }
+
+    .controls-list p {
+        margin: 4px 0;
+    }
+
+    .controls-screen .start-menu-button {
+        padding: 4px 20px;
+        font-size: 22px;
+    }
 }
 
 .display-none {
