@@ -352,7 +352,6 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        //mo.drawFrame(this.ctx); // draw the frame of the object on the canvas for collision detection
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }

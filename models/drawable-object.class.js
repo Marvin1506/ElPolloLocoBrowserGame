@@ -53,24 +53,4 @@ class DrawableObject {
      *
      * @param {CanvasRenderingContext2D} ctx The canvas rendering context.
     */
-    /*drawFrame(ctx) {
-        if(this instanceof Character || this instanceof ChickenSmall || this instanceof Chicken){
-            ctx.beginPath();
-            ctx.lineWidth = "2";
-            ctx.strokeStyle = "blue";
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-
-            ctx.beginPath();
-            ctx.strokeStyle = "red";
-            ctx.lineWidth = "3";
-            ctx.rect(
-            this.x + this.offset.left,
-            this.y + this.offset.top,
-            this.width - this.offset.left - this.offset.right,
-            this.height - this.offset.top - this.offset.bottom
-            );
-            ctx.stroke();
-        }
-    }*/
 }
