@@ -157,6 +157,9 @@ class World {
      * Checks whether the player collects bottles.
     */
     checkBottleCollisions() {
+        if (this.statusBarBottles.percentage >= 100) {
+            return;
+        }
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
                 let newPercentage = Math.min(this.statusBarBottles.percentage + 20, 100);
