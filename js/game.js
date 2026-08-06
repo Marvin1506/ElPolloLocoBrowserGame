@@ -247,6 +247,7 @@ window.addEventListener("keydown", (event) => { // event listener that listens f
         keyboard.DOWN = true;
     }
     if (event.code == "Space") {
+        event.preventDefault();
         keyboard.SPACE = true;
     }
     if (event.code == "KeyD") {

@@ -37,7 +37,8 @@ function enterFullscreen(element) {
  *
  * @returns {void}
 */
-function toggleFullscreen() {
+function toggleFullscreen(event) {
+    event?.currentTarget.blur();
     if (!document.fullscreenElement) {
         const element = document.getElementById("game-content-fullscreen");
         enterFullscreen(element);
