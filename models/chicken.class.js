@@ -6,7 +6,7 @@
 class Chicken extends movableObject{
     y = 360;
     height = 60;
-    width = 80;
+    width = 78;
     isDeadChicken = false;
     static lastX = 100;
 

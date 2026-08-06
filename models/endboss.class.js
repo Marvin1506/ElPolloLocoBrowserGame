@@ -16,7 +16,7 @@ class Endboss extends movableObject {
     walkPhaseStartTime = 0;
 
     offset = {
-        top: 110,
+        top: 80,
         bottom: 30,
         left: 35,
         right: 30
