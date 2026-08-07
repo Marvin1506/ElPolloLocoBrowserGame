@@ -14,6 +14,7 @@ class Character extends movableObject {
     snoringSound = null;
     isSnoring = false;
     lostScreenScheduled = false;
+    lastInput = Date.now();
 
     offset = {
         top: 120,

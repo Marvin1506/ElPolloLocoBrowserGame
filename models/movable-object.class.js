@@ -64,11 +64,13 @@ class movableObject extends DrawableObject {
     */
     hit() {
         this.energy -= 20;
-        if(this.energy < 0) {
+
+        if (this.energy <= 0) {
             this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
+            return;
         }
+
+        this.lastHit = Date.now();
     }
 
     /**
@@ -86,7 +88,7 @@ class movableObject extends DrawableObject {
      * @returns {boolean} True if the object's energy is zero.
     */
     isDead() {
-        return this.energy == 0;
+        return this.energy <= 0;
     }
 
     /**
