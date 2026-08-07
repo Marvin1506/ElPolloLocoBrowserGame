@@ -5,7 +5,7 @@
 */
 class Character extends movableObject {
     height = 280;
-    y = 65; // 150
+    y = 152; // 150
     speed = 10;
     world;
     ignoreEnemyCollision;
@@ -15,6 +15,7 @@ class Character extends movableObject {
     isSnoring = false;
     lostScreenScheduled = false;
     lastInput = Date.now();
+    groundY = 152;
 
     offset = {
         top: 120,

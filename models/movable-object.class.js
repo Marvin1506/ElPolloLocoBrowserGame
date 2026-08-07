@@ -9,6 +9,8 @@ class movableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     deadAnimationStarted = false;
+    groundY = 152;
+    y = 152;
 
     /**
      * Applies gravity to the object.
@@ -18,6 +20,11 @@ class movableObject extends DrawableObject {
             if (this.isAboveGround() || this.speedY > 0) {
             this.y -= this.speedY;
             this.speedY -= this.acceleration;
+            }
+
+            if (this.y > 152 && !(this instanceof ThrowableObject)) {
+                this.y = 152;
+                this.speedY = 0;
             }
         }, 1000 / 25);
     }
