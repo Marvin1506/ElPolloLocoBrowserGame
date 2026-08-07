@@ -217,18 +217,36 @@ class Character extends movableObject {
     }
 
     /**
-     * Moves the character horizontally based on the keyboard state.
+     * Moves the character horizontally based on the keyboard state. Can not move out of level.
     */
     moveCharacter() {
-        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-            this.moveRight();
-            this.otherDirection = false;
-        }
+    if (this.canMoveRight() && this.x < this.world.level.level_end_x) {
+        this.moveRight();
+        this.otherDirection = false;
+    }
 
-        if (this.world.keyboard.LEFT && this.x > -620) {
-            this.moveLeft();
-            this.otherDirection = true;
+    if (this.world.keyboard.LEFT && this.x > -620) {
+        this.moveLeft();
+        this.otherDirection = true;
+    }
+}
+
+    /**
+     * Checks whether the character is allowed to move to the right.
+     * Prevents the character from moving through the end boss.
+     * @returns {boolean} True if the character can move to the right.
+    */
+    canMoveRight() {
+        if (!this.world.keyboard.RIGHT) {
+            return false;
         }
+        const boss = this.world.level.enemies.find(
+            enemy => enemy instanceof Endboss
+        );
+        if (!boss || boss.isDead()) {
+            return this.x < this.world.level.level_end_x;
+        }
+        return this.x + this.width - this.offset.right < boss.x + boss.offset.left;
     }
 
     /**

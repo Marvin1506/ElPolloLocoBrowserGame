@@ -13,7 +13,7 @@ class movableObject extends DrawableObject {
     y = 152;
 
     /**
-     * Applies gravity to the object.
+     * Applies gravity to the object. Objects can not fall trough the ground.
     */
     applyGravity() {
         setInterval(() => {
