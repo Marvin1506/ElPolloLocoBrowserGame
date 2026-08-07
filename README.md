@@ -51,4 +51,5 @@ https://marvin-mutwil.developerakademie.net/A-Developer-Akademie-Projekte/ElPoll
 https://github.com/user-attachments/assets/480ef8f7-bad3-4b0d-b4a7-ab4a939e9d15
 
 
-<img width="712" height="473" alt="Screenshot 2026-07-07 013615" src="https://github.com/user-attachments/assets/da2fb05e-7f45-4005-958e-86d370992b9a" />
+<img width="716" height="473" alt="El_pollo_loco" src="https://github.com/user-attachments/assets/e90ab1e7-bd5c-4a2d-820c-af6f5e89e7e2" />
+
